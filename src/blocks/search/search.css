@@ -1,0 +1,13 @@
+@import url(./__button/button.css);
+@import url(./__description/description.css);
+@import url(./__form/form.css);
+@import url(./__input/input.css);
+@import url(./__title/title.css);
+
+.search {
+  display:flex;
+  flex-direction: column;
+  width:608px;
+  color:#FFFFFF;
+  margin: 160px auto 0;
+}

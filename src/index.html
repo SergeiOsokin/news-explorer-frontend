@@ -1,14 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="autor" content="Sergei Osokin">
+  <meta name="description" content="Страница для поиска новостей по ключевым словам">
   <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
-  <title>TEst</title>
+  <link rel="icon" href="<%=require('./images/Favicon.svg').default%>">
+  <title>News</title>
 </head>
+
 <body>
-  <h1>Hello</h1>
-  <img src="<%=require('./images/flower-4931280_640.jpg').default%>">
-  <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+  <div class="root">
+
+    <header class="header">
+      <p class="header__title">NewsExplorer</p>
+      <!-- <ul class="header__menu">
+        <li class="header__menu-main"><a href="#">Главная</a></li>
+        <li class="header__menu-articles"><a href="#">Сохранённые статьи</a></li>
+      </ul> -->
+      <div class="header__menu">
+        <a class="header__menu-main" href="#">Главная</a>
+        <a class="header__menu-articles" href="#">Сохранённые статьи</a>
+      </div>
+      <button class="header__button button">Авторизоваться</button>
+    </header>
+
+    <main class="search">
+      <h1 class="search__title">Что в мире творится?</h1>
+      <p class="search__description">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.
+      </p>
+      <form class="search__form">
+        <input class="search__input" type="text" placeholder="Введите тему новости">
+        <button class="search__button button">Искать</button>
+      </form>
+
+    </main>
+
+
+  </div>
+
+
+
+
+
+
+
+  <script type="module" src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 </body>
+
 </html>

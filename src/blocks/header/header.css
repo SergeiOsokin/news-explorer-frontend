@@ -1,0 +1,10 @@
+@import url(./__title/title.css);
+@import url(./__menu/menu.css);
+@import url(./__button/button.css);
+
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #E5E5E5;
+  color: #ffffff;
+}
