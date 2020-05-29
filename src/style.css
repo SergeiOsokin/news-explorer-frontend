@@ -6,6 +6,7 @@
 @import url(./blocks/search/search.css);
 @import url(./blocks/autor/autor.css);
 @import url(./blocks/footer/footer.css);
+@import url(./blocks/preloader/preloader.css);
 
 body {
   max-width: 1440px;

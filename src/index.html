@@ -7,7 +7,7 @@
   <meta name="autor" content="Sergei Osokin">
   <meta name="description" content="Страница для поиска новостей по ключевым словам">
   <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
-  <link rel="icon" href="<%=require('./images/Favicon.svg').default%>">
+  <link rel="shortcut icon" type="image/x-icon" sizes="16x16" href="<%=require('./images/favicon-16x16.png').default%>">
   <title>News</title>
 </head>
 
@@ -17,8 +17,8 @@
     <header class="header">
       <p class="header__title">NewsExplorer</p>
       <div class="header__menu">
-          <a class="header__menu header__menu_main" href="/">Главная</a>
-          <a class="header__menu header__menu_articles" href="#">Сохранённые статьи</a>
+        <a class="header__menu header__menu_main" href="/">Главная</a>
+        <a class="header__menu header__menu_articles" href="#">Сохранённые статьи</a>
       </div>
       <button class="header__button button">Авторизоваться</button>
     </header>
@@ -34,6 +34,11 @@
     </main>
 
   </div>
+
+  <!-- <section class="result">
+    <i class="circle-preloader"></i>
+  </section> -->
+
 
   <section class="autor">
     <div class="autor__image">
@@ -51,8 +56,10 @@
     <p class="footer__copirate">&copy; 2020 Supersite, Powered by News API</p>
     <a class="footer__link footer__link_main" href="/">Главная</a>
     <a class="footer__link footer__link_YP" href="https://praktikum.yandex.ru/" target="_blank">Яндекс.практикум</a>
-    <a class="footer__link footer__link_GH" href="https://github.com/" target="_blank"><img src="<%=require('./images/github.png').default%>" alt="github"></a>
-    <a class="footer__link footer__link_FB" href="https://www.facebook.com/" target="_blank"><img src="<%=require('./images/facebook.png').default%>" alt="facebook"></a>
+    <a class="footer__link footer__link_GH" href="https://github.com/" target="_blank"><img
+        src="<%=require('./images/github.png').default%>" alt="github"></a>
+    <a class="footer__link footer__link_FB" href="https://www.facebook.com/" target="_blank"><img
+        src="<%=require('./images/facebook.png').default%>" alt="facebook"></a>
   </footer>
 
 
