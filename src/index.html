@@ -52,6 +52,60 @@
     </div>
   </section>
 
+  <div class="popup popup_entrance">
+    <div class="popup__content">
+      <img src="<%=require('./images/close.svg').default%>" alt="" class="popup__close">
+      <h3 class="popup__title">Вход</h3>
+      <form class="popup__form" name="entrance">
+        <div>
+          <label for="email" class="popup__label popup__label_mail">Email</label>
+          <input type="email" autocomplete="off" name="email" class="popup__input popup__input_type-email"
+            placeholder="Введите почту" required maxlength="30" minlength="2"
+            pattern="[a-zA-Z0-1\W\D]{1,}@[[a-zA-Z0-1\W\D]{1,}\.[a-zA-Z]{2,3}">
+          <div class="popup__error popup__error_email">123456</div>
+        </div>
+        <div>
+          <label for="password" class="popup__label popup__label_password">Пароль</label>
+          <input type="password" autocomplete="off" name="password" class="popup__input popup__input_type-password"
+            placeholder="Введите пароль" required>
+        </div>
+        <button class="button popup__button">Войти</button>
+      </form>
+      <p class="popup__or">или <a class="popup__link" href="#">Зарегистрироваться</a></p>
+    </div>
+  </div>
+
+  <div class="popup popup_registration">
+    <div class="popup__content">
+      <img src="<%=require('./images/close.svg').default%>" alt="" class="popup__close">
+      <h3 class="popup__title">Регистрация</h3>
+      <form class="popup__form" name="entrance">
+        <div>
+          <label for="email" class="popup__label popup__label_mail">Email</label>
+          <input type="email" autocomplete="off" name="email"
+            class="popup__input popup__input_registration popup__input_type-email" placeholder="Введите почту" required
+            maxlength="30" minlength="2" pattern="[a-zA-Z0-1\W\D]{1,}@[[a-zA-Z0-1\W\D]{1,}\.[a-zA-Z]{2,3}">
+          <div class="popup__error popup__error_email">123456</div>
+        </div>
+        <div>
+          <label for="password" class="popup__label popup__label_password">Пароль</label>
+          <input type="password" autocomplete="off" name="password"
+            class="popup__input popup__input_registration popup__input_type-password" placeholder="Введите пароль"
+            required>
+        </div>
+        <div>
+          <label for="name" class="popup__label popup__label_name">Имя</label>
+          <input type="text" autocomplete="off" name="name"
+            class="popup__input popup__input_registration popup__input_type_name" placeholder="Введите свое имя"
+            required maxlength="30" minlength="2">
+        </div>
+        <div class="popup__error popup__error_registration">Такой пользователь уже есть</div>
+        <button class="button popup__button">Зарегистрироваться</button>
+      </form>
+      <p class="popup__or">или <a class="popup__link" href="#">Войти</a></p>
+    </div>
+  </div>
+
   <footer class="footer">
     <p class="footer__copirate">&copy; 2020 Supersite, Powered by News API</p>
     <a class="footer__link footer__link_main" href="/">Главная</a>
