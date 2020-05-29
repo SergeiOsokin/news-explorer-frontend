@@ -1,0 +1,27 @@
+.footer__link {
+  color: #1A1B22;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  margin:0;
+  text-align: center;
+}
+
+.footer__link_main {
+  width:112px;
+  margin-left: auto;
+}
+
+.footer__link_YP {
+  width:192px;
+}
+
+.footer__link_GH {
+  margin-left:42px;
+}
+
+.footer__link_FB {
+  margin:0 106px 0 28px;
+}

@@ -1,6 +1,8 @@
 .root {
   width:100%;
+  position: relative;
   height: 576px;
-  background-image: url('../../images/background.png');
+  background: url('../../images/background.png');
   background-repeat: no-repeat;
+  background-position: center;
 }

@@ -5,3 +5,7 @@
   display: block;
   cursor: pointer;
 }
+
+.button:focus {
+  outline-color: transparent;
+}

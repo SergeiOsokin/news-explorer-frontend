@@ -16,13 +16,9 @@
 
     <header class="header">
       <p class="header__title">NewsExplorer</p>
-      <!-- <ul class="header__menu">
-        <li class="header__menu-main"><a href="#">Главная</a></li>
-        <li class="header__menu-articles"><a href="#">Сохранённые статьи</a></li>
-      </ul> -->
       <div class="header__menu">
-        <a class="header__menu-main" href="#">Главная</a>
-        <a class="header__menu-articles" href="#">Сохранённые статьи</a>
+          <a class="header__menu header__menu_main" href="/">Главная</a>
+          <a class="header__menu header__menu_articles" href="#">Сохранённые статьи</a>
       </div>
       <button class="header__button button">Авторизоваться</button>
     </header>
@@ -35,14 +31,29 @@
         <input class="search__input" type="text" placeholder="Введите тему новости">
         <button class="search__button button">Искать</button>
       </form>
-
     </main>
-
 
   </div>
 
+  <section class="autor">
+    <div class="autor__image">
+      <img class="autor__image-content" src="<%=require('./images/avatar-avtor.png').default%>" alt="avatar-avtor">
+    </div>
+    <div class="autor__about">
+      <h2 class="autor__title">Об авторе</h2>
+      <p class="autor__description">Это блок с описанием автора проекта. Здесь следует указать, как вас зовут, чем вы
+        занимаетесь, какими технологиями разработки владеете. <br><br>Также можно рассказать о процессе обучения в
+        Практикуме, чему вы тут научились, и чем можете помочь потенциальным заказчикам.</p>
+    </div>
+  </section>
 
-
+  <footer class="footer">
+    <p class="footer__copirate">&copy; 2020 Supersite, Powered by News API</p>
+    <a class="footer__link footer__link_main" href="/">Главная</a>
+    <a class="footer__link footer__link_YP" href="https://praktikum.yandex.ru/" target="_blank">Яндекс.практикум</a>
+    <a class="footer__link footer__link_GH" href="https://github.com/" target="_blank"><img src="<%=require('./images/github.png').default%>" alt="github"></a>
+    <a class="footer__link footer__link_FB" href="https://www.facebook.com/" target="_blank"><img src="<%=require('./images/facebook.png').default%>" alt="facebook"></a>
+  </footer>
 
 
 

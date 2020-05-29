@@ -1,0 +1,9 @@
+@import url(./__about/about.css);
+@import url(./__description/description.css);
+@import url(./__image/image.css);
+@import url(./__title/title.css);
+
+.autor {
+  display:flex;
+  height:624px;
+}
