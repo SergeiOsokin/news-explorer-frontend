@@ -9,18 +9,6 @@
 @import url(./__error/error.css);
 @import url(./__popup__link/popup__link.css);
 
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .popup.popup_registration {
-    display: none;
+  display: none;
 }

@@ -9,6 +9,7 @@
 @import url(./blocks/preloader/preloader.css);
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/popup_registration/popup_registration.css);
+@import url(./blocks/result/result.css);
 
 body {
   max-width: 1440px;

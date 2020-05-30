@@ -1,0 +1,23 @@
+.result__text {
+  margin: 24px 0 0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #B6BCBF;
+  text-align: center;
+}
+
+.result__text_nothing {
+  font-family: Roboto Slab;
+  font-size: 26px;
+  line-height: 30px;
+  color: #1A1B22;
+  margin: 30px 0 0;
+}
+
+.result__text_sorry {
+  margin: 16px 0 0;
+  width: 90%;
+}

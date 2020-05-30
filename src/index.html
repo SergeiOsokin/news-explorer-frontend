@@ -14,16 +14,16 @@
 <body>
   <div class="root">
 
-    <header class="header">
-      <p class="header__title">NewsExplorer</p>
-      <div class="header__menu">
-        <a class="header__menu header__menu_main" href="/">Главная</a>
-        <a class="header__menu header__menu_articles" href="#">Сохранённые статьи</a>
-      </div>
-      <button class="header__button button">Авторизоваться</button>
-    </header>
+  <header class="header">
+    <p class="header__title">NewsExplorer</p>
+    <div class="header__menu">
+      <a class="header__menu header__menu_main header__menu_active" href="/">Главная</a>
+      <a class="header__menu header__menu_articles" href="#">Сохранённые статьи</a>
+    </div>
+    <button class="header__button button">Авторизоваться</button>
+  </header>
 
-    <main class="search">
+  <main class="search">
       <h1 class="search__title">Что в мире творится?</h1>
       <p class="search__description">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.
       </p>
@@ -35,9 +35,21 @@
 
   </div>
 
-  <!-- <section class="result">
-    <i class="circle-preloader"></i>
-  </section> -->
+  <section class="result">
+    <div class="result__search">
+      <div class="result__searching result__searching_download">
+        <i class="result__circle-preloader"></i>
+        <p class="result__text result__text_searching">Идет поиск новостей...</p>
+      </div>
+      <div class="result__searching result__searching_nothing">
+        <img class="result__img" src="<%=require('./images/not-found.png').default%>"
+          alt="nothing">
+        <p class="result__text result__text_nothing">Ничего не найдено</p>
+        <p class="result__text result__text_sorry">К сожалению по вашему запросу ничего не найдено.</p>
+      </div>
+    </div>
+
+  </section>
 
 
   <section class="autor">

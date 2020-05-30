@@ -8,15 +8,19 @@
   margin-left: auto;
   color: #B6BCBF;
   align-items: center;
+
 }
 
 .header__menu_main {
-  border-bottom: 3px solid #FFFFFF;
-  height:100%;
   color:#FFFFFF;
+  height:100%;
 }
 
 .header__menu_articles {
   height:100%;
   margin-left: 34px;
+}
+
+.header__menu_active {
+  border-bottom: 3px solid #FFFFFF;
 }
