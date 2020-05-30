@@ -1,0 +1,10 @@
+.result-list__title {
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1A1B22;
+  margin:0;
+  padding: 80px 0 64px 104px;
+}

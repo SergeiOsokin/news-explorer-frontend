@@ -1,0 +1,7 @@
+.result-card__description {
+  display: flex;
+  flex-direction: column;
+  width:352px;
+  padding:20px 24px 24px;
+  cursor: pointer;
+}

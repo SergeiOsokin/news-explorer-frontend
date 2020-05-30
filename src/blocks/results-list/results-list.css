@@ -1,0 +1,8 @@
+@import url(./__title/title.css);
+
+.results-list {
+  display: grid;
+  grid-template-columns: repeat(3, 400px);
+  grid-gap: 16px 16px;
+  justify-content: center;
+}

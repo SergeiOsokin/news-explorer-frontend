@@ -5,7 +5,13 @@
 
 .result {
   position: relative;
-  min-height: 282px;
   background: #F5F6F7;
-  display:grid;
+}
+
+.result__found-active {
+  min-height: 974px;
+}
+
+.result__search-active {
+  min-height: 282px;
 }
