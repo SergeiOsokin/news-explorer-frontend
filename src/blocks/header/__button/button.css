@@ -9,3 +9,15 @@
   width: 176px;
   height: 48px;
 }
+
+.header__button_loggined {
+  margin: 19px 104px 13px 32px;
+  width: 112px;
+}
+
+.button__image {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url(../../../images/out.png);
+}
