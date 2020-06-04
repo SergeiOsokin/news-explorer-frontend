@@ -19,8 +19,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.popup.popup_entrance {
-  display: none;
+  display:none;
 }

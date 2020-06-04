@@ -1,0 +1,17 @@
+.info-block__title {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgba(26, 27, 34, 0.5);
+  margin: 40px 0  0 104px;
+}
+
+@media screen and (max-width: 768px) {
+  .info-block__title {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 25px 0  0 40px;
+  }
+}

@@ -9,10 +9,18 @@
   border-radius: 80px;
   width: 288px;
   height: 64px;
-  margin: 56px auto 80px;
+  margin: 0 auto;
 }
 
 .result__button:hover {
   background: #FFFFFF;
   opacity: 0.9;
+}
+
+@media screen and (max-width: 768px) {
+  .result__button {
+    width: 240px;
+    height: 56px;
+    margin: 0 auto;
+  }
 }

@@ -1,0 +1,9 @@
+@import url(./__amount/amount.css);
+@import url(./__key-words/key-words.css);
+@import url(./__title/title.css);
+
+.info-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

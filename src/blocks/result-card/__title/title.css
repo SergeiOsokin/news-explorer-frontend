@@ -7,3 +7,11 @@
   color: #1A1B22;
   margin: 12px 0 16px;
 }
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .result-card__title {
+    font-size: 22px;
+    line-height: 24px;
+    margin: 12px 0 10px;
+  }
+}

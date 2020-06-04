@@ -8,3 +8,8 @@
   margin-left: 104px;
 }
 
+@media screen and (max-width: 768px) {
+  .footer__copirate {
+    margin-left: 40px;
+  }
+}

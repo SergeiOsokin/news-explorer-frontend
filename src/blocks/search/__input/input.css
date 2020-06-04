@@ -16,3 +16,9 @@
 .search__input:focus {
   outline-color: transparent;
 }
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .search__input {
+    height: 56px;
+  }
+}

@@ -59,8 +59,13 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: false,
-      template: './src/index.html', // откуда брать образец для сравнения с текущим видом проекта
+      template: './src/pages/index.html', // откуда брать образец для сравнения с текущим видом проекта
       filename: 'index.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
+    }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: './src/pages/savearticles.html', // откуда брать образец для сравнения с текущим видом проекта
+      filename: 'savearticles.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
     }),
     new WebpackMd5Hash(),
     new webpack.DefinePlugin({

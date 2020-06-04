@@ -1,8 +1,36 @@
 .root {
   width:100%;
   position: relative;
+  height: calc(576px - 80px);
+}
+
+.root::before {
+  content: '';
+  width:100%;
+  position: absolute;
+  top: -80px;
+  display: block;
   height: 576px;
   background: url('../../images/background.png');
   background-repeat: no-repeat;
   background-position: center;
+  z-index: -1;
+
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .root {
+    height: calc(400px - 66px);
+  }
+  .root::before {
+    content: '';
+    width:100%;
+    position: absolute;
+    top: -66px;
+    display: block;
+    height: 400px;
+    background: url('../../images/background.png');
+    background-position: center;
+    z-index: -1;
+  }
 }

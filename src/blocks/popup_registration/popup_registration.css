@@ -8,7 +8,3 @@
 @import url(./__label/label.css);
 @import url(./__error/error.css);
 @import url(./__popup__link/popup__link.css);
-
-.popup.popup_registration {
-  display: none;
-}

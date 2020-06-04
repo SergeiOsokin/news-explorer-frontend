@@ -1,4 +1,10 @@
 .autor__about {
-  width:600px;
-  margin:131px 0 279px 0;
+  width: 100%;
+  margin:131px 56px 279px 56px;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .autor__about {
+    margin:40px 40px 72px 32px;
+  }
 }

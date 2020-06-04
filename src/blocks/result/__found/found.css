@@ -1,8 +1,15 @@
 .result__found {
   display:none;
+  position: relative;
+  padding-bottom: 80px;
 }
 
 .result__found_active {
   display: block;
-  min-height: 974px;
+}
+
+@media screen and (max-width: 768px) {
+  .result__found {
+    padding-bottom: 40px;
+  }
 }

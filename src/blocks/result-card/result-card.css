@@ -5,13 +5,16 @@
 @import url(./__title/title.css);
 @import url(./__text/text.css);
 @import url(./__source/source.css);
+@import url(./__categories/categories.css);
 
 .result-card {
   position:relative;
   display: flex;
   flex-direction: column;
-  width: 400px;
   background-color: #fff;
   border-radius: 10px;
-  min-height: 360px;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+
 }

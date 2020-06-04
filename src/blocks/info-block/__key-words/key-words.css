@@ -1,0 +1,17 @@
+.info-block__key-words {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1A1B22;
+  margin: 30px 0  56px 104px;
+}
+
+@media screen and (max-width: 768px) {
+  .info-block__key-words {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 16px 0  32px 40px;
+  }
+}

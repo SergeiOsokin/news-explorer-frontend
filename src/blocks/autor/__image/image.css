@@ -1,5 +1,18 @@
-.autor__image {
-  width:464px;
-  overflow: hidden;
-  margin: 80px 56px 80px 104px;
+/* .autor__image {
+  position: relative;
+  max-width: calc(100% - (100% - 464px));
+  margin:80px 56px 80px 104px;
+  border: 1px solid blue;
+} */
+
+.autor__image-content {
+  max-width:calc(100% - (100% - 464px));
+  margin:80px 0 80px 104px;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .autor__image-content {
+    max-width: calc(100% - (100% - 232px));
+    margin:61px 0 61px 40px;
+  }
 }

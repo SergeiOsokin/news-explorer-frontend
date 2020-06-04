@@ -7,21 +7,23 @@
   <meta name="autor" content="Sergei Osokin">
   <meta name="description" content="Страница для поиска новостей по ключевым словам">
   <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
-  <link rel="shortcut icon" type="image/x-icon" sizes="16x16" href="<%=require('./images/favicon-16x16.png').default%>">
+  <link rel="shortcut icon" type="image/x-icon" sizes="16x16"
+    href="<%=require('../images/favicon-16x16.png').default%>">
   <title>News</title>
 </head>
 
 <body>
-  <div class="root">
 
-    <header class="header">
-      <p class="header__title">NewsExplorer</p>
-      <div class="header__menu">
-        <a class="header__menu header__menu_main header__menu_active" href="/">Главная</a>
-        <a class="header__menu header__menu_articles" href="#">Сохранённые статьи</a>
-      </div>
-      <button class="header__button button ">Авторизация <div class=""></div></button>
-    </header>
+  <header class="header">
+    <p class="header__title">NewsExplorer</p>
+    <nav class="header__menu">
+      <a class="header__menu-main header__menu_active" href="/">Главная</a>
+      <a class="header__menu-articles" href="savearticles.html">Сохранённые статьи</a>
+    </nav>
+    <button class="header__button button">Авторизация <div class=""></div></button>
+  </header>
+
+  <section class="root">
 
     <main class="search">
       <h1 class="search__title">Что в мире творится?</h1>
@@ -33,7 +35,7 @@
       </form>
     </main>
 
-  </div>
+  </section>
 
   <section class="result">
 
@@ -45,16 +47,16 @@
       </div>
 
       <div class="result__searching result__searching_nothing">
-        <img class="result__img" src="<%=require('./images/not-found.png').default%>" alt="nothing">
+        <img class="result__img" src="<%=require('../images/not-found.png').default%>" alt="nothing">
         <p class="result__text result__text_nothing">Ничего не найдено</p>
         <p class="result__text result__text_sorry">К сожалению по вашему запросу ничего не найдено.</p>
       </div>
 
     </div>
 
-    <div class="result__found">
+    <div class="result__found result__found_active">
 
-      <h3 class="result-list__title">Результаты поиска</h3>
+      <h3 class="result__title">Результаты поиска</h3>
 
       <div class="results-list">
 
@@ -62,6 +64,7 @@
           <div class="result-card__image"
             style="background-image: url(https://cdn.pixabay.com/photo/2020/05/25/20/06/storm-5220380__340.jpg)">
             <button class="result-card__icon"></button>
+            <p class="result-card__categories"></p>
           </div>
           <div class="result-card__description">
             <p class="result-card__date">2 агуста 2020</p>
@@ -98,20 +101,26 @@
             <h4 class="result-card__title">Национальное достояние – парки</h4>
             <p class="result-card__text">В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала
               складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к
-              природе.</p>
+              природе. В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала
+              складываться система национальных парков – охрВ 2016 году Америка отмечала важный юбилей: сто лет назад
+              здесь начала
+              складываться система национальных парков – охр</p>
             <a class="result-card__source" href="#">Лента.ру</a>
           </div>
         </div>
       </div>
+
       <button class="button result__button">Показать еще</button>
+
     </div>
 
   </section>
 
   <section class="autor">
-    <div class="autor__image">
-      <img class="autor__image-content" src="<%=require('./images/avatar-avtor.png').default%>" alt="avatar-avtor">
-    </div>
+    <img class="autor__image-content" src="<%=require('../images/avatar-avtor.png').default%>" alt="avatar-avtor">
+    <!-- <div class="autor__image">
+      <img class="autor__image-content" src="<%=require('../images/avatar-avtor.png').default%>" alt="avatar-avtor">
+    </div> -->
     <div class="autor__about">
       <h2 class="autor__title">Об авторе</h2>
       <p class="autor__description">Это блок с описанием автора проекта. Здесь следует указать, как вас зовут, чем вы
@@ -122,7 +131,7 @@
 
   <div class="popup popup_entrance">
     <div class="popup__content">
-      <img src="<%=require('./images/close.svg').default%>" alt="" class="popup__close">
+      <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close">
       <h3 class="popup__title">Вход</h3>
       <form class="popup__form" name="entrance">
         <div>
@@ -145,7 +154,7 @@
 
   <div class="popup popup_registration">
     <div class="popup__content">
-      <img src="<%=require('./images/close.svg').default%>" alt="" class="popup__close">
+      <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close">
       <h3 class="popup__title">Регистрация</h3>
       <form class="popup__form" name="entrance">
         <div>
@@ -179,9 +188,9 @@
     <a class="footer__link footer__link_main" href="/">Главная</a>
     <a class="footer__link footer__link_YP" href="https://praktikum.yandex.ru/" target="_blank">Яндекс.практикум</a>
     <a class="footer__link footer__link_GH" href="https://github.com/" target="_blank"><img
-        src="<%=require('./images/github.png').default%>" alt="github"></a>
+        src="<%=require('../images/github.png').default%>" alt="github"></a>
     <a class="footer__link footer__link_FB" href="https://www.facebook.com/" target="_blank"><img
-        src="<%=require('./images/facebook.png').default%>" alt="facebook"></a>
+        src="<%=require('../images/facebook.png').default%>" alt="facebook"></a>
   </footer>
 
 
