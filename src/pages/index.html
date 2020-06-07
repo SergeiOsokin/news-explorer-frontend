@@ -16,11 +16,13 @@
 
   <header class="header">
     <p class="header__title">NewsExplorer</p>
-    <nav class="header__menu">
-      <a class="header__menu-main header__menu_active" href="/">Главная</a>
-      <a class="header__menu-articles" href="savearticles.html">Сохранённые статьи</a>
-    </nav>
-    <button class="header__button button">Авторизация <div class=""></div></button>
+    <input type="checkbox" class="header__checkbox">
+      <nav class="header__menu">
+        <a class="header__menu-main header__menu_active" href="/">Главная</a>
+        <a class="header__menu-articles" href="savearticles.html">Сохранённые статьи</a>
+        <button class="header__button button">Авторизация <div class=""></div></button>
+      </nav>
+      <span class="header__menu-image"></span>
   </header>
 
   <section class="root">
@@ -41,7 +43,7 @@
 
     <div class="result__searching">
 
-      <div class="result__searching result__searching_download ">
+      <div class="result__searching result__searching_download">
         <i class="result__circle-preloader"></i>
         <p class="result__text result__text_searching">Идет поиск новостей...</p>
       </div>
@@ -129,7 +131,7 @@
     </div>
   </section>
 
-  <div class="popup popup_entrance">
+  <div class="popup popup_entrance ">
     <div class="popup__content">
       <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close">
       <h3 class="popup__title">Вход</h3>
@@ -152,7 +154,7 @@
     </div>
   </div>
 
-  <div class="popup popup_registration">
+  <div class="popup popup_registration ">
     <div class="popup__content">
       <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close">
       <h3 class="popup__title">Регистрация</h3>
@@ -180,6 +182,14 @@
         <button class="button popup__button">Зарегистрироваться</button>
       </form>
       <p class="popup__or">или <a class="popup__link" href="#">Войти</a></p>
+    </div>
+  </div>
+
+  <div class="popup popup_successfully">
+    <div class="popup__content popup__content_successfully">
+      <img src="<%=require('../images/close.svg').default%>" alt="" class="popup__close">
+      <h3 class="popup__title">Пользователь успешно зарегистрирован!</h3>
+      <a class="popup__link popup__link_successfully" href="#">Выполнить вход</a>
     </div>
   </div>
 

@@ -28,3 +28,11 @@
   }
 }
 
+@media screen and (min-width:320px) and (max-width:767px) {
+  .result-card__categories {
+    top: 16px;
+    left: 16px;
+  }
+}
+
+

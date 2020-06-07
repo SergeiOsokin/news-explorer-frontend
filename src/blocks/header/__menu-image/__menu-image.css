@@ -1,0 +1,17 @@
+.header__menu-image {
+  display: none;
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .header__menu-image {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: block;
+    z-index: -1;
+    width: 24px;
+    height: 24px;
+    background: url(../../../images/menu.png);
+    background-repeat: no-repeat;
+  }
+}

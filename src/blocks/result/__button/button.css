@@ -17,7 +17,7 @@
   opacity: 0.9;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width:768px) and (max-width:1023px) {
   .result__button {
     width: 240px;
     height: 56px;

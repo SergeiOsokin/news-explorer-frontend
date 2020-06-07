@@ -54,3 +54,13 @@
     right: 8px;
   }
 }
+
+@media screen and (min-width:320px) and (max-width:768px) {
+  .result-card__icon:hover:after {
+    display: none;
+  }
+  .result-card__icon {
+    top: 16px;
+    right: 16px;
+  }
+}

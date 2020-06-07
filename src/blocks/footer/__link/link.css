@@ -26,7 +26,7 @@
   margin:0 106px 0 28px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width:768px) and (max-width:1023px) {
   .footer__link_main {
     width:88px;
     margin-left: auto;
@@ -42,5 +42,32 @@
 
   .footer__link_FB {
     margin:0 40px 0 28px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .footer__link {
+    margin: 0;
+    text-align: left;
+  }
+  .footer__link_main {
+    width:200px;
+    order: 1;
+  }
+
+  .footer__link_YP {
+    width:200px;
+    order: 4;
+    margin: 23px 0 38px;
+  }
+
+  .footer__link_GH {
+    margin-left: 17px;
+    order: 2;
+  }
+
+  .footer__link_FB {
+    margin-left: 27px;
+    order: 3;
   }
 }

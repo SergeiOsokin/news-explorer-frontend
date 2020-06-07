@@ -14,6 +14,7 @@
   background: url('../../images/background.png');
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
   z-index: -1;
 
 }
@@ -25,12 +26,33 @@
   .root::before {
     content: '';
     width:100%;
-    position: absolute;
     top: -66px;
+    position: absolute;
     display: block;
     height: 400px;
     background: url('../../images/background.png');
+    background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
+    z-index: -1;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .root {
+    height: 480px;
+  }
+  .root::before {
+    content: '';
+    width:100%;
+    position: absolute;
+    top: -56px;
+    display: block;
+    height: 536px;
+    background: url('../../images/background-mobile.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     z-index: -1;
   }
 }
