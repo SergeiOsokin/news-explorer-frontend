@@ -1,18 +1,14 @@
 .header__checkbox {
   display: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }
 
 @media screen and (min-width:320px) and (max-width:767px) {
-  .header__checkbox {
-    display: block;
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    top: 16px;
-    right: 16px;
-  }
-  .header__checkbox:checked + .header__menu {
+  .header__checkbox:checked ~ .header__menu {
     display: flex;
+    width: 100%;
     position: absolute;
     top: 56px;
     left: 0;
@@ -21,4 +17,10 @@
     border-radius: 0 0 16px 16px;
     z-index: 1;
   }
+  .header__checkbox:checked ~ .header__menu-image {
+    cursor: pointer;
+    display:block;
+    background: url(../../../images/back.png);
+  }
+
 }

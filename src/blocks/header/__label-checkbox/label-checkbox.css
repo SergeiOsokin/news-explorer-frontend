@@ -1,0 +1,15 @@
+.header__label-checkbox {
+  display: none;
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .header__label-checkbox {
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 1;
+  }
+}

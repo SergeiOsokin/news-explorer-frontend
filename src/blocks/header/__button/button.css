@@ -48,5 +48,25 @@
 }
 
 @media screen and (min-width:320px) and (max-width:767px) {
-
+  .header__button {
+    width: 288px;
+    font-size: 16px;
+    height: 56px;
+    margin: 22px 16px 24px;
+  }
+  .header__button_loggined {
+    margin: 22px 16px 24px;
+    min-width: 100px;
+    height: 56px;
+  }
+  .button.header__button_black {
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+  }
+  .button__image_black {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url(../../../images/out.png);
+  }
 }

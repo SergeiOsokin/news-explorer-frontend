@@ -3,6 +3,7 @@
 @import url(./__button/button.css);
 @import url(./__checkbox/checkbox.css);
 @import url(./__menu-image/__menu-image.css);
+@import url(./__label-checkbox/label-checkbox.css);
 
 .header {
   display: flex;
