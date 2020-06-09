@@ -9,7 +9,10 @@ const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   // main js
-  entry: { main: './src/index.js' },
+  entry: {
+    main: './src/js/index.js',
+    second: './src/js/second.js',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[chunkhash].js',
@@ -64,8 +67,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: false,
-      template: './src/pages/savearticles.html', // откуда брать образец для сравнения с текущим видом проекта
-      filename: 'savearticles.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
+      template: './src/pages/articles.html', // откуда брать образец для сравнения с текущим видом проекта
+      filename: './articles.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
     }),
     new WebpackMd5Hash(),
     new webpack.DefinePlugin({

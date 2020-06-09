@@ -14,28 +14,20 @@
 
 <body>
   <header class="header header_black">
-    <p class="header__title">NewsExplorer</p>
     <label class="header__label-checkbox" for="checkbox"></label>
     <input type="checkbox" class="header__checkbox" id="checkbox">
     <span class="header__menu-image header__menu-image_black"></span>
+    <p class="header__title">NewsExplorer</p>
+
     <nav class="header__menu header__menu_black">
       <a class="header__menu-main header__menu-main_black" href="/">Главная</a>
-      <a class="header__menu-articles header__menu_active-black header__menu-articles_black" href="/savearticles.html">Сохранённые
+      <a class="header__menu-articles header__menu_active-black header__menu-articles_black"
+        href="/articles.html">Сохранённые
         статьи</a>
-      <button class="button header__button_loggined header__button_black">Грета <div class="button__image_black"></div>
+      <button class="button header__button_loggined header__button_black">Грета<span class="button__image_black"></span>
       </button>
     </nav>
   </header>
-  <!-- <header class="header header_black">
-    <p class="header__title">NewsExplorer</p>
-    <nav class="header__menu header__menu_black">
-      <a class="header__menu-main header__menu-main_black" href="/">Главная</a>
-      <a class="header__menu-articles header__menu_active-black header__menu-articles_black" href="#">Сохранённые
-        статьи</a>
-    </nav>
-    <button class="button header__button_loggined header__button_black">Грета <div class="button__image_black"></div>
-    </button>
-  </header> -->
 
   <section class="info-block">
     <p class="info-block__title">Сохранённые статьи</p>
@@ -125,7 +117,7 @@
         src="<%=require('../images/facebook.png').default%>" alt="facebook"></a>
   </footer>
 
-  <script type="module" src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+  <script type="module" src="<%= htmlWebpackPlugin.files.chunks.second.entry %>"></script>
 </body>
 
 </html>

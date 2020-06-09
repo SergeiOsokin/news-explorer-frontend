@@ -15,21 +15,22 @@
 <body>
 
   <header class="header">
+    <label class="header__label-checkbox" for="checkbox"></label>
+    <input type="checkbox" class="header__checkbox" id="checkbox">
+    <span class="header__menu-image"></span>
     <p class="header__title">NewsExplorer</p>
-      <label class="header__label-checkbox" for="checkbox"></label>
-      <input type="checkbox" class="header__checkbox" id="checkbox">
-      <span class="header__menu-image"></span>
 
-      <nav class="header__menu">
-        <a class="header__menu-main header__menu_active" href="/">Главная</a>
-        <a class="header__menu-articles" href="savearticles.html">Сохранённые статьи</a>
-        <button class="header__button button">Авторизация <div class=""></div></button>
-      </nav>
+
+    <nav class="header__menu">
+      <a class="header__menu-main header__menu_active" href="/">Главная</a>
+      <a class="header__menu-articles" href="/articles.html">Сохранённые статьи</a>
+      <button class="header__button button">Авторизация<span class=""></span></button>
+    </nav>
   </header>
 
-  <section class="root">
+  <main class="root">
 
-    <main class="search">
+    <section class="search">
       <h1 class="search__title">Что в мире творится?</h1>
       <p class="search__description">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.
       </p>
@@ -37,9 +38,9 @@
         <input class="search__input" type="text" placeholder="Введите тему новости">
         <button class="search__button button">Искать</button>
       </form>
-    </main>
+    </section>
 
-  </section>
+  </main>
 
   <section class="result">
 
@@ -122,9 +123,6 @@
 
   <section class="autor">
     <img class="autor__image-content" src="<%=require('../images/avatar-avtor.png').default%>" alt="avatar-avtor">
-    <!-- <div class="autor__image">
-      <img class="autor__image-content" src="<%=require('../images/avatar-avtor.png').default%>" alt="avatar-avtor">
-    </div> -->
     <div class="autor__about">
       <h2 class="autor__title">Об авторе</h2>
       <p class="autor__description">Это блок с описанием автора проекта. Здесь следует указать, как вас зовут, чем вы
@@ -140,14 +138,14 @@
       <form class="popup__form" name="entrance">
         <div>
           <label for="email" class="popup__label popup__label_mail">Email</label>
-          <input type="email" autocomplete="off" name="email" class="popup__input popup__input_type-email"
+          <input type="email" autocomplete="off" id="email" class="popup__input popup__input_type-email"
             placeholder="Введите почту" required maxlength="30" minlength="2"
             pattern="[a-zA-Z0-1\W\D]{1,}@[[a-zA-Z0-1\W\D]{1,}\.[a-zA-Z]{2,3}">
           <div class="popup__error popup__error_email">123456</div>
         </div>
         <div>
           <label for="password" class="popup__label popup__label_password">Пароль</label>
-          <input type="password" autocomplete="off" name="password" class="popup__input popup__input_type-password"
+          <input type="password" autocomplete="off" id="password" class="popup__input popup__input_type-password"
             placeholder="Введите пароль" required>
         </div>
         <button class="button popup__button">Войти</button>
@@ -162,21 +160,21 @@
       <h3 class="popup__title">Регистрация</h3>
       <form class="popup__form" name="entrance">
         <div>
-          <label for="email" class="popup__label popup__label_mail">Email</label>
-          <input type="email" autocomplete="off" name="email"
+          <label for="email-reg" class="popup__label popup__label_mail">Email</label>
+          <input type="email" autocomplete="off" id="email-reg"
             class="popup__input popup__input_registration popup__input_type-email" placeholder="Введите почту" required
             maxlength="30" minlength="2" pattern="[a-zA-Z0-1\W\D]{1,}@[[a-zA-Z0-1\W\D]{1,}\.[a-zA-Z]{2,3}">
           <div class="popup__error popup__error_email">123456</div>
         </div>
         <div>
-          <label for="password" class="popup__label popup__label_password">Пароль</label>
-          <input type="password" autocomplete="off" name="password"
+          <label for="password-reg" class="popup__label popup__label_password">Пароль</label>
+          <input type="password" autocomplete="off" id="password-reg"
             class="popup__input popup__input_registration popup__input_type-password" placeholder="Введите пароль"
             required>
         </div>
         <div>
           <label for="name" class="popup__label popup__label_name">Имя</label>
-          <input type="text" autocomplete="off" name="name"
+          <input type="text" autocomplete="off" id="name"
             class="popup__input popup__input_registration popup__input_type_name" placeholder="Введите свое имя"
             required maxlength="30" minlength="2">
         </div>
