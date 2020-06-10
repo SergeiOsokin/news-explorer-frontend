@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="autor" content="Sergei Osokin">
   <meta name="description" content="Страница для поиска новостей по ключевым словам">
-  <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
+  <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.css %>">
   <link rel="shortcut icon" type="image/x-icon" sizes="16x16"
     href="<%=require('../images/favicon-16x16.png').default%>">
   <title>News</title>
@@ -20,9 +20,9 @@
     <p class="header__title">NewsExplorer</p>
 
     <nav class="header__menu header__menu_black">
-      <a class="header__menu-main header__menu-main_black" href="/">Главная</a>
+      <a class="header__menu-main header__menu-main_black" href="./">Главная</a>
       <a class="header__menu-articles header__menu_active-black header__menu-articles_black"
-        href="/articles.html">Сохранённые
+        href="./articles.html">Сохранённые
         статьи</a>
       <button class="button header__button_loggined header__button_black">Грета<span class="button__image_black"></span>
       </button>
@@ -117,7 +117,7 @@
         src="<%=require('../images/facebook.png').default%>" alt="facebook"></a>
   </footer>
 
-  <script type="module" src="<%= htmlWebpackPlugin.files.chunks.second.entry %>"></script>
+  <script type="module" src="<%= htmlWebpackPlugin.files.js %>"></script>
 </body>
 
 </html>

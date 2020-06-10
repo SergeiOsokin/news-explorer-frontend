@@ -11,11 +11,11 @@ module.exports = {
   // main js
   entry: {
     main: './src/js/index.js',
-    second: './src/js/second.js',
+    articles: './src/js/articles.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[chunkhash].js',
+    filename: './js/[name].[chunkhash].js',
   },
   module: {
     rules: [{ // тут описываются правила
@@ -49,7 +49,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.[contenthash].css',
+      filename: './style/style.[contenthash].css',
     }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
@@ -64,11 +64,13 @@ module.exports = {
       inject: false,
       template: './src/pages/index.html', // откуда брать образец для сравнения с текущим видом проекта
       filename: 'index.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
+      chunks: ['main'],
     }),
     new HtmlWebpackPlugin({
       inject: false,
       template: './src/pages/articles.html', // откуда брать образец для сравнения с текущим видом проекта
       filename: './articles.html', // имя выходного файла, то есть того, что окажется в папке dist после сборки
+      chunks: ['articles'],
     }),
     new WebpackMd5Hash(),
     new webpack.DefinePlugin({
