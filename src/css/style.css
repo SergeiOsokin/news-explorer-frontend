@@ -15,6 +15,7 @@
 @import url(../blocks/info-block/info-block.css);
 @import url(../blocks/saved-articles/saved-articles.css);
 @import url(../blocks/popup_successfully/popup_successfully.css);
+@import url(../blocks/input/input.css);
 
 body {
   max-width: 1440px;

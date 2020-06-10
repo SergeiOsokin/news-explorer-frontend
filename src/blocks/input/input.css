@@ -1,0 +1,8 @@
+.input:focus {
+  border-radius: 100px;
+  border-color: yellowgreen
+}
+
+.popup__input:focus {
+  border-radius: 0;
+}

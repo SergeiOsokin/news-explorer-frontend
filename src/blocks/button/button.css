@@ -4,7 +4,8 @@
   color: white;
   display: block;
   cursor: pointer;
-  border-radius: 100px;;
+  border-radius: 100px;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
 .button:focus {

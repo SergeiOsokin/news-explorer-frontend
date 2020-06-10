@@ -1,6 +1,6 @@
 .result__text {
   margin: 24px 0 0;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -10,7 +10,7 @@
 }
 
 .result__text_nothing {
-  font-family: Roboto Slab;
+  font-family: Roboto Slab, Arial, Helvetica, sans-serif;
   font-size: 26px;
   line-height: 30px;
   color: #1A1B22;

@@ -1,7 +1,7 @@
 .header__menu {
   position: relative;
   display:flex;
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -59,6 +59,7 @@
   }
   .header__menu_active {
     margin-top: 16px;
+    border-bottom: none;
   }
   .header__menu::after {
     display: block;
@@ -67,7 +68,5 @@
     top: -56px;
     left: 0;
     background: #1A1B22;
-    /* border-radius: 0 0 16px 16px;
-    z-index: 1; */
   }
 }

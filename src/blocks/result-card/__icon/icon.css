@@ -17,7 +17,7 @@
 
 .result-card__icon:hover:after {
   content: "Войдите, чтобы сохранять статьи";
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 10px;
@@ -36,7 +36,7 @@
 
 .result-card__icon.result-card__icon_backet:hover:after {
   content: "Убрать из сохраненных";
-  font-family: Roboto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 10px;

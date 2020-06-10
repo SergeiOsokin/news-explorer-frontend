@@ -13,6 +13,6 @@
 @media screen and (min-width:320px) and (max-width:767px) {
   .autor__image-content {
     max-width: calc(100% - (100% - 272px));
-    margin:32px 24px 0;
+    margin:32px auto 0;
   }
 }
