@@ -12,7 +12,7 @@
   <title>News</title>
 </head>
 
-<body>
+<body class="body">
 
   <header class="header">
     <label class="header__label-checkbox" for="checkbox"></label>
@@ -148,16 +148,17 @@
           <input type="email" autocomplete="off" id="email" class="input popup__input popup__input_type-email"
             placeholder="Введите почту" required maxlength="30" minlength="2"
             pattern="[a-zA-Z0-1\W\D]{1,}@[[a-zA-Z0-1\W\D]{1,}\.[a-zA-Z]{2,3}">
-          <div class="popup__error popup__error_email">123456</div>
+          <div class="popup__error popup__error_email"></div>
         </div>
         <div>
           <label for="password" class="popup__label popup__label_password">Пароль</label>
           <input type="password" autocomplete="off" id="password" class="input popup__input popup__input_type-password"
-            placeholder="Введите пароль" required>
+            placeholder="Введите пароль" minlength="2" required>
+            <div class="popup__error popup__error_password"></div>
         </div>
-        <button class="button popup__button">Войти</button>
+        <button class="button popup__button" disabled>Войти</button>
       </form>
-      <p class="popup__or">или <a class="popup__link" href="#">Зарегистрироваться</a></p>
+      <p class="popup__or">или <a class="popup__link popup__link_registration" href="#">Зарегистрироваться</a></p>
     </div>
   </div>
 
@@ -171,24 +172,26 @@
           <input type="email" autocomplete="off" id="email-reg"
             class="input popup__input popup__input_registration popup__input_type-email" placeholder="Введите почту"
             required maxlength="30" minlength="2" pattern="[a-zA-Z0-1\W\D]{1,}@[[a-zA-Z0-1\W\D]{1,}\.[a-zA-Z]{2,3}">
-          <div class="popup__error popup__error_email">123456</div>
+          <div class="popup__error popup__error_email"></div>
         </div>
         <div>
           <label for="password-reg" class="popup__label popup__label_password">Пароль</label>
           <input type="password" autocomplete="off" id="password-reg"
             class="input popup__input popup__input_registration popup__input_type-password" placeholder="Введите пароль"
-            required>
+            required minlength="2">
+            <div class="popup__error popup__error_email"></div>
         </div>
         <div>
           <label for="name" class="popup__label popup__label_name">Имя</label>
           <input type="text" autocomplete="off" id="name"
             class="input popup__input popup__input_registration popup__input_type_name" placeholder="Введите свое имя"
             required maxlength="30" minlength="2">
+            <div class="popup__error popup__error_email"></div>
         </div>
         <div class="popup__error popup__error_registration">Такой пользователь уже есть</div>
-        <button class="button popup__button">Зарегистрироваться</button>
+        <button class="button popup__button" disabled>Зарегистрироваться</button>
       </form>
-      <p class="popup__or">или <a class="popup__link" href="#">Войти</a></p>
+      <p class="popup__or">или <a class="popup__link popup__link_entrance" href="#">Войти</a></p>
     </div>
   </div>
 

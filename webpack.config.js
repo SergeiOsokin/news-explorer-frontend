@@ -11,7 +11,7 @@ module.exports = {
   // main js
   entry: {
     main: './src/js/index.js',
-    articles: './src/js/articles.js',
+    articles: './src/js/articlespage/articles.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
