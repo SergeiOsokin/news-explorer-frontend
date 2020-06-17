@@ -13,7 +13,12 @@
   margin: 19px 104px 13px 32px;
   min-width: 112px;
 }
-
+.header__button_loggined.disabled {
+  display: none;
+}
+.header__button.disabled {
+  display: none;
+}
 .button__image {
   display: inline-block;
   width: 16px;

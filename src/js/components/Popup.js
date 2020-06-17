@@ -3,6 +3,7 @@
 export default class Popup {
   constructor(element) {
     this.element = element;
+    // this.element.addEventListener('click', this.close);
   }
 
   open(event) {
@@ -13,6 +14,9 @@ export default class Popup {
       this.element.classList.add('popup_is-opened');
     }
     if (event.target.classList.contains('popup__link_entrance')) {
+      this.element.classList.add('popup_is-opened');
+    }
+    if (event.target.classList.contains('popup__link_successfully')) {
       this.element.classList.add('popup_is-opened');
     }
   }
@@ -28,7 +32,7 @@ export default class Popup {
     });
   }
 
-  // setContent() {
-
-  // }
+  setContent() {
+    this.element.classList.add('popup_is-opened');
+  }
 }

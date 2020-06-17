@@ -15,7 +15,7 @@ export default class Form {
   _validateInputElement(event) { // валидирует переданный в качестве аргумента инпут;
     const divError = event.target.closest('div').querySelector('.popup__error');
     if (event.target.validity.tooShort) {
-      return divError.textContent = 'Должно быть от 2 до 30 символов';
+      return divError.textContent = 'Должно быть от 6 до 30 символов';
     } if (event.target.validity.valueMissing) {
       return divError.textContent = 'Это обязательное поле';
     }
@@ -25,8 +25,8 @@ export default class Form {
     return divError.textContent = '';
   }
 
-  setServerError() { // добавляет форме ошибку, пришедшую с сервера;
-
+  setServerError(err) { // добавляет форме ошибку, пришедшую с сервера;
+    this.form.querySelector('.popup__error_registration').textContent = err;
   }
 
   _validateForm(form, button) { // валидирует всю форму;

@@ -20,6 +20,10 @@
   align-items: center;
 }
 
+.header__menu-articles_not-logged {
+  display: none;
+}
+
 .header__menu_active {
   color:#FFFFFF;
   margin-right: 34px;

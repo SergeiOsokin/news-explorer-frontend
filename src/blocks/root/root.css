@@ -8,9 +8,9 @@
   content: '';
   width:100%;
   position: absolute;
-  top: -80px;
+  top: -84px;
   display: block;
-  height: 576px;
+  height: 580px;
   background: url('../../images/background.png');
   background-repeat: no-repeat;
   background-position: center;
@@ -26,10 +26,10 @@
   .root::before {
     content: '';
     width:100%;
-    top: -66px;
+    top: -70px;
     position: absolute;
     display: block;
-    height: 400px;
+    height: 404px;
     background: url('../../images/background.png');
     background-repeat: no-repeat;
     background-position: center;

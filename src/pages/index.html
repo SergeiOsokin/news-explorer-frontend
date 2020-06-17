@@ -21,8 +21,9 @@
     <p class="header__title">NewsExplorer</p>
     <nav class="header__menu">
       <a class="header__menu-main header__menu_active" href="./">Главная</a>
-      <a class="header__menu-articles" href="./articles.html">Сохранённые статьи</a>
-      <button class="header__button button">Авторизация<span class=""></span></button>
+      <a class="header__menu-articles header__menu-articles_not-logged" href="./articles.html">Сохранённые статьи</a>
+      <button class="header__button button">Авторизация</button>
+      <button class="button header__button_loggined disabled"><span class="button__image"></span>
     </nav>
   </header>
 
@@ -145,17 +146,18 @@
       <form class="popup__form" name="entrance">
         <div>
           <label for="email" class="popup__label popup__label_mail">Email</label>
-          <input type="email" autocomplete="off" id="email" class="input popup__input popup__input_type-email"
+          <input type="email" autocomplete="off" id="email" name="emailenter" class="input popup__input popup__input_type-email"
             placeholder="Введите почту" required maxlength="30" minlength="2"
             pattern="[a-zA-Z0-1\W\D]{1,}@[[a-zA-Z0-1\W\D]{1,}\.[a-zA-Z]{2,3}">
           <div class="popup__error popup__error_email"></div>
         </div>
         <div>
           <label for="password" class="popup__label popup__label_password">Пароль</label>
-          <input type="password" autocomplete="off" id="password" class="input popup__input popup__input_type-password"
-            placeholder="Введите пароль" minlength="2" required>
+          <input type="password" autocomplete="off" id="password" name="passwordenter" class="input popup__input popup__input_type-password"
+            placeholder="Введите пароль" minlength="6" required>
             <div class="popup__error popup__error_password"></div>
         </div>
+        <div class="popup__error popup__error_registration"></div>
         <button class="button popup__button" disabled>Войти</button>
       </form>
       <p class="popup__or">или <a class="popup__link popup__link_registration" href="#">Зарегистрироваться</a></p>
@@ -169,26 +171,26 @@
       <form class="popup__form" name="entrance">
         <div>
           <label for="email-reg" class="popup__label popup__label_mail">Email</label>
-          <input type="email" autocomplete="off" id="email-reg"
+          <input type="email" autocomplete="off" id="email-reg" name="emailreg"
             class="input popup__input popup__input_registration popup__input_type-email" placeholder="Введите почту"
             required maxlength="30" minlength="2" pattern="[a-zA-Z0-1\W\D]{1,}@[[a-zA-Z0-1\W\D]{1,}\.[a-zA-Z]{2,3}">
           <div class="popup__error popup__error_email"></div>
         </div>
         <div>
           <label for="password-reg" class="popup__label popup__label_password">Пароль</label>
-          <input type="password" autocomplete="off" id="password-reg"
+          <input type="password" autocomplete="off" id="password-reg" name="passwordreg"
             class="input popup__input popup__input_registration popup__input_type-password" placeholder="Введите пароль"
-            required minlength="2">
+            required minlength="6">
             <div class="popup__error popup__error_email"></div>
         </div>
         <div>
           <label for="name" class="popup__label popup__label_name">Имя</label>
-          <input type="text" autocomplete="off" id="name"
+          <input type="text" autocomplete="off" id="name" name="name"
             class="input popup__input popup__input_registration popup__input_type_name" placeholder="Введите свое имя"
             required maxlength="30" minlength="2">
             <div class="popup__error popup__error_email"></div>
         </div>
-        <div class="popup__error popup__error_registration">Такой пользователь уже есть</div>
+        <div class="popup__error popup__error_registration"></div>
         <button class="button popup__button" disabled>Зарегистрироваться</button>
       </form>
       <p class="popup__or">или <a class="popup__link popup__link_entrance" href="#">Войти</a></p>
