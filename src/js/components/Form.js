@@ -15,18 +15,18 @@ export default class Form {
   _validateInputElement(event) { // валидирует переданный в качестве аргумента инпут;
     const divError = event.target.closest('div').querySelector('.popup__error');
     if (event.target.validity.tooShort) {
-      return divError.textContent = 'Должно быть от 6 до 30 символов';
+      return divError.textContent = 'Введите от 6 до 30 символов';
     } if (event.target.validity.valueMissing) {
-      return divError.textContent = 'Это обязательное поле';
+      return divError.textContent = 'Обязательное поле';
     }
     if (event.target.validity.patternMismatch) {
-      return divError.textContent = 'Введите корректный email';
+      return divError.textContent = 'Некорректные данные';
     }
     return divError.textContent = '';
   }
 
   setServerError(err) { // добавляет форме ошибку, пришедшую с сервера;
-    this.form.querySelector('.popup__error_registration').textContent = err;
+    this.form.querySelector('.popup__error_text').textContent = err;
   }
 
   _validateForm(form, button) { // валидирует всю форму;

@@ -1,104 +1,133 @@
 import '../css/style.css';
 
 import * as constant from './constants/constants';
+import * as utils from './utils/utils';
 import Popup from './components/Popup';
 import Form from './components/Form';
 import Header from './components/Header';
 import MainApi from './api/MainApi';
+import NewsApi from './api/NewsApi';
+import NewsCardList from './components/NewsCardList';
 
-const POPUP_ENTRANCE = new Popup(constant.POPUP_ENTRANCE);
-const POPUP_REGISTRATION = new Popup(constant.POPUP_REGISTRATION);
-const POPUP_SUCCESSFULLY = new Popup(constant.POPUP_SUCCESSFULLY);
+const PopupEntrance = new Popup(constant.POPUP_ENTRANCE);
+const PopupRegistration = new Popup(constant.POPUP_REGISTRATION);
+const PopupSuccessfully = new Popup(constant.POPUP_SUCCESSFULLY);
 
-const FORM_ENTRANCE = new Form(constant.POPUP_ENTRANCE);
-const FORM_REGISTRATION = new Form(constant.POPUP_REGISTRATION);
+const FormEntrance = new Form(constant.POPUP_ENTRANCE);
+const FormRegistration = new Form(constant.POPUP_REGISTRATION);
+const FormSearch = new Form(constant.BLOCK_SEARCH);
 
-const HEADER_BLOCK = new Header(constant.HEADER);
+const HeaderBlock = new Header(constant.HEADER);
 
-const MAINAPI = new MainApi();
+const MainAPI = new MainApi();
+
+const NewsAPI = new NewsApi(constant.BASE_OPTION);
+
+const CardList = new NewsCardList(constant.ARTICLES_CONTAINER);
 
 // listeners
 constant.BUTTON_AUTORIZATION.addEventListener('click', (event) => {
-  POPUP_ENTRANCE.open(event);
-  FORM_ENTRANCE.setValidate(event);
+  PopupEntrance.open(event);
+  FormEntrance.setValidate(event);
 });
 
 for (const button of constant.BUTTON_CLOSE) {
   button.addEventListener('click', (event) => {
-    POPUP_ENTRANCE.clearContent();
-    POPUP_ENTRANCE.close();
-    POPUP_REGISTRATION.clearContent();
-    POPUP_REGISTRATION.close();
-    POPUP_SUCCESSFULLY.close();
+    PopupEntrance.clearContent();
+    PopupEntrance.close();
+    PopupRegistration.clearContent();
+    PopupRegistration.close();
+    PopupSuccessfully.close();
   });
 }
 
 constant.FORM_REGISTRATION.addEventListener('submit', (event) => {
   event.preventDefault();
-  MAINAPI.signup(
+  MainAPI.signup(
     constant.FORM_REGISTRATION.emailreg.value,
     constant.FORM_REGISTRATION.passwordreg.value,
     constant.FORM_REGISTRATION.name.value,
   )
     .then((res) => {
       if (res.data) {
-        POPUP_REGISTRATION.clearContent();
-        POPUP_REGISTRATION.close();
-        POPUP_SUCCESSFULLY.setContent();
+        PopupRegistration.clearContent();
+        PopupRegistration.close();
+        PopupSuccessfully.setContent();
         return;
       }
-      return Promise.reject(res);
+      throw Promise.reject(res);
     })
-    .catch((err) => FORM_REGISTRATION.setServerError(err.message));
+    .catch((err) => FormRegistration.setServerError(err.message));
 });
 
 constant.FORM_ENTRANCE.addEventListener('submit', (event) => {
   event.preventDefault();
-  MAINAPI.signin(
+  MainAPI.signin(
     constant.FORM_ENTRANCE.emailenter.value,
     constant.FORM_ENTRANCE.passwordenter.value,
   )
     .then((res) => {
       if (res.data) {
-        POPUP_ENTRANCE.clearContent();
-        POPUP_ENTRANCE.close();
-        HEADER_BLOCK.showSavedArticles();
-        HEADER_BLOCK.changeButton(res.data);
+        PopupEntrance.clearContent();
+        PopupEntrance.close();
+        HeaderBlock.showSavedArticles();
+        HeaderBlock.changeButton(res.data);
         return;
       }
-      return Promise.reject(res);
+      throw Promise.reject(res);
     })
-    .catch((err) => FORM_ENTRANCE.setServerError(err.message));
+    .catch((err) => FormEntrance.setServerError(err.message));
 });
 
 constant.LINK_REGISTRATION.addEventListener('click', (event) => {
-  POPUP_ENTRANCE.clearContent();
-  POPUP_ENTRANCE.close();
-  POPUP_REGISTRATION.open(event);
-  FORM_REGISTRATION.setValidate(event);
+  PopupEntrance.clearContent();
+  PopupEntrance.close();
+  PopupRegistration.open(event);
+  FormRegistration.setValidate(event);
 });
 
 constant.LINK_ENTRANCE.addEventListener('click', (event) => {
-  POPUP_REGISTRATION.clearContent();
-  POPUP_REGISTRATION.close();
-  POPUP_ENTRANCE.open(event);
+  PopupRegistration.clearContent();
+  PopupRegistration.close();
+  PopupEntrance.open(event);
 });
 
 constant.LINK_SUCCESSFULLY.addEventListener('click', (event) => {
-  POPUP_SUCCESSFULLY.close();
-  POPUP_ENTRANCE.open(event);
+  PopupSuccessfully.close();
+  PopupEntrance.open(event);
 });
 
-MAINAPI.getUserData()
-  .then((data) => {
-    if (data.message) {
-      return Promise.reject(data);
-    }
-    constant.PROPS.isLoggedIn = true;
-    constant.PROPS.userName = data.data.name;
-    return HEADER_BLOCK.render(constant.PROPS);
-  })
-  .catch((err) => console.log(err.message));
+constant.BLOCK_SEARCH.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const date = utils.getDateFromTo();
+  constant.PRELOUDER.classList.add('result__searching_active');
+  NewsAPI.getNews(
+    constant.FORM_SEARCH.search.value,
+    date.dateFrom,
+    date.dateTo,
+  )
+    .then((data) => {
+      constant.PRELOUDER.classList.remove('result__searching_active');
+      if (data.articles.length === 0) {
+        return constant.NOT_FOUND.classList.add('result__searching_active');
+      }
+      constant.RESULT_FOUND.classList.add('result__found_active');
+      CardList.renderResults(data.articles);
+      // console.log(data.articles);
+    })
+    .catch((err) => console.log(err));
+});
 
+// MainAPI.getUserData()
+//   .then((data) => {
+//     if (data.message) {
+//       return Promise.reject(data);
+//     }
+//     constant.PROPS.isLoggedIn = true;
+//     constant.PROPS.userName = data.data.name;
+//     return HeaderBlock.render(constant.PROPS);
+//   })
+//   .catch((err) => console.log(err.message));
 
-export { MAINAPI };
+FormSearch.setValidate();
+

@@ -5,9 +5,11 @@ const BUTTON_CLOSE = BODY_DOCUMENT.querySelectorAll('.popup__close');
 const POPUP_ENTRANCE = BODY_DOCUMENT.querySelector('.popup_entrance');
 const POPUP_REGISTRATION = BODY_DOCUMENT.querySelector('.popup_registration');
 const POPUP_SUCCESSFULLY = BODY_DOCUMENT.querySelector('.popup_successfully');
+const BLOCK_SEARCH = BODY_DOCUMENT.querySelector('.search');
 // forms
 const FORM_ENTRANCE = POPUP_ENTRANCE.querySelector('.popup__form');
 const FORM_REGISTRATION = POPUP_REGISTRATION.querySelector('.popup__form');
+const FORM_SEARCH = BLOCK_SEARCH.querySelector('.search__form');
 // popups' button/link
 const BUTTON_AUTORIZATION = BODY_DOCUMENT.querySelector('.header__button');
 const LINK_REGISTRATION = BODY_DOCUMENT.querySelector('.popup__link_registration');
@@ -19,12 +21,21 @@ const INPUT_ERRORS = {
   valueMissing: 'Это обязательное поле',
   patternMismatch: 'Введите корректный email',
 };
-// header
+
 const HEADER = BODY_DOCUMENT.querySelector('.header');
 const PROPS = {
   isLoggedIn: false,
   userName: '',
 };
+const PRELOUDER = BODY_DOCUMENT.querySelector('.result__searching_download');
+const NOT_FOUND = BODY_DOCUMENT.querySelector('.result__searching_nothing');
+
+const ARTICLES_CONTAINER = BODY_DOCUMENT.querySelector('.results-list');
+const RESULT_FOUND = BODY_DOCUMENT.querySelector('.result__found');
+
+const BASE_OPTION = 'http://newsapi.org/v2/everything?'
++ 'pageSize=10&'
++ 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
 
 export {
   BODY_DOCUMENT,
@@ -40,5 +51,12 @@ export {
   HEADER,
   FORM_ENTRANCE,
   FORM_REGISTRATION,
+  BLOCK_SEARCH,
   PROPS,
+  BASE_OPTION,
+  FORM_SEARCH,
+  PRELOUDER,
+  NOT_FOUND,
+  ARTICLES_CONTAINER,
+  RESULT_FOUND,
 };
