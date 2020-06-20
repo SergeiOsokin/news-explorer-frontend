@@ -51,8 +51,25 @@ export default class MainApi {
 
   }
 
-  createArticle() {
-
+  createArticle({
+    urlToImage, publishedAt, title, description, url, sourceName, keyWord,
+  }) {
+    return (fetch('http://localhost:3000/articles', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        keyword: keyWord,
+        title,
+        text: description,
+        date: publishedAt,
+        source: sourceName,
+        link: url,
+        image: urlToImage,
+      }),
+    })
+      .then((res) => res.json())
+    );
   }
 
   removeArticle() {

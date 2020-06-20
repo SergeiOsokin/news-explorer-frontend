@@ -15,7 +15,7 @@
   background: url(../../../images/icon-hover.png) center no-repeat;
 }
 
-.result-card__icon:hover:after {
+.result-card__icon_isNotLogIn:hover:after {
   content: "Войдите, чтобы сохранять статьи";
   font-family: Roboto, Arial, Helvetica, sans-serif;
   font-style: normal;

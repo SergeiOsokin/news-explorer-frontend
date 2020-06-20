@@ -8,6 +8,7 @@ import Header from './components/Header';
 import MainApi from './api/MainApi';
 import NewsApi from './api/NewsApi';
 import NewsCardList from './components/NewsCardList';
+import NewsCard from './components/NewsCard';
 
 const PopupEntrance = new Popup(constant.POPUP_ENTRANCE);
 const PopupRegistration = new Popup(constant.POPUP_REGISTRATION);
@@ -24,6 +25,8 @@ const MainAPI = new MainApi();
 const NewsAPI = new NewsApi(constant.BASE_OPTION);
 
 const CardList = new NewsCardList(constant.ARTICLES_CONTAINER);
+
+const NewsCardClass = new NewsCard();
 
 // listeners
 constant.BUTTON_AUTORIZATION.addEventListener('click', (event) => {
@@ -49,13 +52,13 @@ constant.FORM_REGISTRATION.addEventListener('submit', (event) => {
     constant.FORM_REGISTRATION.name.value,
   )
     .then((res) => {
-      if (res.data) {
-        PopupRegistration.clearContent();
-        PopupRegistration.close();
-        PopupSuccessfully.setContent();
-        return;
+      console.log(res.data);
+      if (!res.data) {
+        return Promise.reject(res);
       }
-      throw Promise.reject(res);
+      PopupRegistration.clearContent();
+      PopupRegistration.close();
+      PopupSuccessfully.setContent();
     })
     .catch((err) => FormRegistration.setServerError(err.message));
 });
@@ -67,14 +70,14 @@ constant.FORM_ENTRANCE.addEventListener('submit', (event) => {
     constant.FORM_ENTRANCE.passwordenter.value,
   )
     .then((res) => {
-      if (res.data) {
-        PopupEntrance.clearContent();
-        PopupEntrance.close();
-        HeaderBlock.showSavedArticles();
-        HeaderBlock.changeButton(res.data);
-        return;
+      console.log(res.data);
+      if (!res.data) {
+        return Promise.reject(res);
       }
-      throw Promise.reject(res);
+      PopupEntrance.clearContent();
+      PopupEntrance.close();
+      HeaderBlock.showSavedArticles();
+      HeaderBlock.changeButton(res.data);
     })
     .catch((err) => FormEntrance.setServerError(err.message));
 });
@@ -112,22 +115,40 @@ constant.BLOCK_SEARCH.addEventListener('submit', (event) => {
         return constant.NOT_FOUND.classList.add('result__searching_active');
       }
       constant.RESULT_FOUND.classList.add('result__found_active');
-      CardList.renderResults(data.articles);
-      // console.log(data.articles);
+      CardList.renderResults(data.articles, constant.FORM_SEARCH.search.value);
     })
     .catch((err) => console.log(err));
 });
 
-// MainAPI.getUserData()
-//   .then((data) => {
-//     if (data.message) {
-//       return Promise.reject(data);
-//     }
-//     constant.PROPS.isLoggedIn = true;
-//     constant.PROPS.userName = data.data.name;
-//     return HeaderBlock.render(constant.PROPS);
-//   })
-//   .catch((err) => console.log(err.message));
+constant.ARTICLES_CONTAINER.addEventListener('click', (event) => {
+  if (event.target.classList.contains('result-card__icon')) {
+    const iconActive = NewsCardClass.renderIcon(event, constant.BUTTON_AUTORIZATION);
+    if (iconActive) {
+      const article = CardList.addCard(event);
+      MainAPI.createArticle(article)
+        .then((data) => {
+          if (data) {
+            console.log(data);
+            NewsCardClass.iconSaved(article.icon);
+            return;
+          }
+          throw Promise.reject(data);
+        })
+        .catch((err) => console.log(err.message));
+    }
+  }
+});
+
+MainAPI.getUserData()
+  .then((data) => {
+    if (data.message) {
+      return Promise.reject(data);
+    }
+    constant.PROPS.isLoggedIn = true;
+    constant.PROPS.userName = data.data.name;
+    HeaderBlock.render(constant.PROPS);
+  })
+  .catch((err) => console.log(err.message));
+
 
 FormSearch.setValidate();
-

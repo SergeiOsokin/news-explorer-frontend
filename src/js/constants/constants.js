@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable import/no-mutable-exports */
 // eslint-disable-next-line no-undef
 const BODY_DOCUMENT = document.querySelector('.body');
 const BUTTON_CLOSE = BODY_DOCUMENT.querySelectorAll('.popup__close');
@@ -24,7 +26,7 @@ const INPUT_ERRORS = {
 
 const HEADER = BODY_DOCUMENT.querySelector('.header');
 const PROPS = {
-  isLoggedIn: false,
+  isLoggedIn: '',
   userName: '',
 };
 const PRELOUDER = BODY_DOCUMENT.querySelector('.result__searching_download');
@@ -36,6 +38,8 @@ const RESULT_FOUND = BODY_DOCUMENT.querySelector('.result__found');
 const BASE_OPTION = 'http://newsapi.org/v2/everything?'
 + 'pageSize=10&'
 + 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
+
+const BUTTON_SHOW_MORE = BODY_DOCUMENT.querySelector('.result__button');
 
 export {
   BODY_DOCUMENT,
@@ -59,4 +63,5 @@ export {
   NOT_FOUND,
   ARTICLES_CONTAINER,
   RESULT_FOUND,
+  BUTTON_SHOW_MORE,
 };
