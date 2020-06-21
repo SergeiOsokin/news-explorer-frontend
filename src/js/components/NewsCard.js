@@ -16,4 +16,8 @@ export default class NewsCard {
   iconSaved(element) {
     element.classList.add('result-card__icon-active');
   }
+
+  iconDeleted(element) {
+    element.classList.remove('result-card__icon-active');
+  }
 }

@@ -48,7 +48,12 @@ export default class MainApi {
   }
 
   getArticles() {
-
+    return (fetch('http://localhost:3000/articles', {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+    );
   }
 
   createArticle({
@@ -72,7 +77,13 @@ export default class MainApi {
     );
   }
 
-  removeArticle() {
-
+  removeArticle(idArticle) {
+    return (fetch(`http://localhost:3000/articles/${idArticle}`, {
+      method: 'delete',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => res.json())
+    );
   }
 }

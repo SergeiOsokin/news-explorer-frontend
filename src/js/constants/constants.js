@@ -29,6 +29,8 @@ const PROPS = {
   isLoggedIn: '',
   userName: '',
 };
+const RESULT_BLOCK = BODY_DOCUMENT.querySelector('.result');
+
 const PRELOUDER = BODY_DOCUMENT.querySelector('.result__searching_download');
 const NOT_FOUND = BODY_DOCUMENT.querySelector('.result__searching_nothing');
 
@@ -64,4 +66,5 @@ export {
   ARTICLES_CONTAINER,
   RESULT_FOUND,
   BUTTON_SHOW_MORE,
+  RESULT_BLOCK,
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import '../css/style.css';
 
 import * as constant from './constants/constants';
@@ -17,17 +18,11 @@ const PopupSuccessfully = new Popup(constant.POPUP_SUCCESSFULLY);
 const FormEntrance = new Form(constant.POPUP_ENTRANCE);
 const FormRegistration = new Form(constant.POPUP_REGISTRATION);
 const FormSearch = new Form(constant.BLOCK_SEARCH);
-
 const HeaderBlock = new Header(constant.HEADER);
-
 const MainAPI = new MainApi();
-
 const NewsAPI = new NewsApi(constant.BASE_OPTION);
-
 const CardList = new NewsCardList(constant.ARTICLES_CONTAINER);
-
 const NewsCardClass = new NewsCard();
-
 // listeners
 constant.BUTTON_AUTORIZATION.addEventListener('click', (event) => {
   PopupEntrance.open(event);
@@ -70,7 +65,6 @@ constant.FORM_ENTRANCE.addEventListener('submit', (event) => {
     constant.FORM_ENTRANCE.passwordenter.value,
   )
     .then((res) => {
-      console.log(res.data);
       if (!res.data) {
         return Promise.reject(res);
       }
@@ -104,6 +98,7 @@ constant.BLOCK_SEARCH.addEventListener('submit', (event) => {
   event.preventDefault();
   const date = utils.getDateFromTo();
   constant.PRELOUDER.classList.add('result__searching_active');
+  constant.RESULT_BLOCK.scrollIntoView(true);
   NewsAPI.getNews(
     constant.FORM_SEARCH.search.value,
     date.dateFrom,
@@ -121,14 +116,15 @@ constant.BLOCK_SEARCH.addEventListener('submit', (event) => {
 });
 
 constant.ARTICLES_CONTAINER.addEventListener('click', (event) => {
-  if (event.target.classList.contains('result-card__icon')) {
+  const icon = event.target.classList.contains('result-card__icon');
+  if (icon) {
     const iconActive = NewsCardClass.renderIcon(event, constant.BUTTON_AUTORIZATION);
     if (iconActive) {
-      const article = CardList.addCard(event);
+      const article = CardList.dataCard(event);
       MainAPI.createArticle(article)
         .then((data) => {
           if (data) {
-            console.log(data);
+            CardList.setId(event, data.data._id);
             NewsCardClass.iconSaved(article.icon);
             return;
           }
@@ -136,6 +132,20 @@ constant.ARTICLES_CONTAINER.addEventListener('click', (event) => {
         })
         .catch((err) => console.log(err.message));
     }
+  }
+});
+
+constant.ARTICLES_CONTAINER.addEventListener('click', (event) => {
+  const icon = event.target.classList.contains('result-card__icon-active');
+  if (icon) {
+    const id = CardList.getId(event);
+    const article = CardList.dataCard(event);
+    MainAPI.removeArticle(id)
+      .then((data) => {
+        console.log(data)
+        NewsCardClass.iconDeleted(article.icon);
+      })
+      .catch((err) => console.log(err));
   }
 });
 
