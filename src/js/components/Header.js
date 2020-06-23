@@ -10,14 +10,14 @@ export default class Header {
     }
   }
 
-  renderArticle({ isLoggedIn, userName }) {
+  renderName({ isLoggedIn, userName }) {
     if (isLoggedIn) {
       this.changeButton(userName);
     }
   }
 
   showSavedArticles() {
-    this.header.querySelector('.header__menu-articles').classList.remove('header__menu-articles_not-logged');
+    this.header.querySelector('.header__menu-articles').classList.toggle('header__menu-articles_not-logged');
   }
 
   changeButton(name) {
@@ -28,5 +28,11 @@ export default class Header {
     }
     this.header.querySelector('.header__button_loggined').classList.remove('disabled');
     this.header.querySelector('.header__button_loggined').textContent = name;
+  }
+
+  backButtonAutorization() {
+    this.header.querySelector('.header__button').classList.remove('disabled');
+    this.header.querySelector('.header__button_loggined').classList.add('disabled');
+    this.header.querySelector('.header__button_loggined').textContent = '';
   }
 }

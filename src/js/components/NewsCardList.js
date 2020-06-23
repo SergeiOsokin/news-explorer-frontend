@@ -8,7 +8,7 @@ export default class NewsCardList {
     this.container = container;
   }
 
-  _cardTag(urlToImage, publishedAt, title, description, url, sourceName, keyWord, backet = '', keyword = '') {
+  _cardTag(urlToImage, publishedAt, title, description, url, sourceName, keyWord, backet = '', keyword = '', id = '') {
     const resultCard = document.createElement('div');
     resultCard.classList.add('result-card');
     resultCard.insertAdjacentHTML(
@@ -27,6 +27,7 @@ export default class NewsCardList {
         </div>
     `,
     );
+    resultCard.setAttribute('id', id);
     return resultCard;
   }
 
@@ -61,6 +62,7 @@ export default class NewsCardList {
         element.keyword,
         backet,
         keyword,
+        element._id,
       );
       this.container.appendChild(article);
     }
@@ -99,5 +101,9 @@ export default class NewsCardList {
 
   getId(event) {
     return event.target.closest('.result-card').getAttribute('id');
+  }
+
+  remove(event) {
+    this.container.removeChild(event.target.closest('.result-card'));
   }
 }

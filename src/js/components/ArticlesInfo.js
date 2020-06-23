@@ -4,20 +4,24 @@ export default class ArticlesInfo {
     this.element = element;
   }
 
-  amountArticles(name, amount) {
-    switch (amount) {
+  amountArticles(name) {
+    switch (this.amount()) {
       case 1:
-        this.element.querySelector('.info-block__amount').textContent = `${name}, у вас ${amount} сохранённая статья`;
+        this.element.querySelector('.info-block__amount').textContent = `${name}, у вас ${this.amount()} сохранённая статья`;
         break;
       case 2:
-        this.element.querySelector('.info-block__amount').textContent = `${name}, у вас ${amount} сохранённых статьи`;
+        this.element.querySelector('.info-block__amount').textContent = `${name}, у вас ${this.amount()} сохранённых статьи`;
         break;
       case 3:
-        this.element.querySelector('.info-block__amount').textContent = `${name}, у вас ${amount} сохранённых статьи`;
+        this.element.querySelector('.info-block__amount').textContent = `${name}, у вас ${this.amount()} сохранённых статьи`;
         break;
       default:
-        this.element.querySelector('.info-block__amount').textContent = `${name}, у вас ${amount} сохранённых статей`;
+        this.element.querySelector('.info-block__amount').textContent = `${name}, у вас ${this.amount()} сохранённых статей`;
     }
+  }
+
+  amount(arr = [0]) {
+    return arr.length;
   }
 
   keyWords(keyWords) {

@@ -3,15 +3,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable class-methods-use-this */
 export default class MainApi {
-  // constructor(option) {
-  //   this.option = option;
-  // }
+  constructor(option) {
+    this.option = option;
+  }
 
-  // registration new user
   signup(email, password, name) {
-    return (fetch('http://localhost:3000/signup', {
+    return (fetch(`${this.option.baseUrl}signup`, {
       method: 'POST',
-      credentials: 'include',
+      credentials: `${this.option.credentials}`,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email,
@@ -25,9 +24,9 @@ export default class MainApi {
 
   // autentification
   signin(email, password) {
-    return (fetch('http://localhost:3000/signin', {
+    return (fetch(`${this.option.baseUrl}signin`, {
       method: 'POST',
-      credentials: 'include',
+      credentials: `${this.option.credentials}`,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email,
@@ -39,18 +38,18 @@ export default class MainApi {
   }
 
   getUserData() {
-    return (fetch('http://localhost:3000/users/me', {
+    return (fetch(`${this.option.baseUrl}users/me`, {
       method: 'GET',
-      credentials: 'include',
+      credentials: `${this.option.credentials}`,
     })
       .then((res) => res.json())
     );
   }
 
   getArticles() {
-    return (fetch('http://localhost:3000/articles', {
+    return (fetch(`${this.option.baseUrl}articles`, {
       method: 'GET',
-      credentials: 'include',
+      credentials: `${this.option.credentials}`,
     })
       .then((res) => res.json())
     );
@@ -59,9 +58,9 @@ export default class MainApi {
   createArticle({
     urlToImage, publishedAt, title, description, url, sourceName, keyWord,
   }) {
-    return (fetch('http://localhost:3000/articles', {
+    return (fetch(`${this.option.baseUrl}articles`, {
       method: 'POST',
-      credentials: 'include',
+      credentials: `${this.option.credentials}`,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         keyword: keyWord,
@@ -78,12 +77,21 @@ export default class MainApi {
   }
 
   removeArticle(idArticle) {
-    return (fetch(`http://localhost:3000/articles/${idArticle}`, {
-      method: 'delete',
-      credentials: 'include',
+    return (fetch(`${this.option.baseUrl}articles/${idArticle}`, {
+      method: 'DELETE',
+      credentials: `${this.option.credentials}`,
       headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => res.json())
+    );
+  }
+
+  removeCookie() {
+    return (fetch(`${this.option.baseUrl}deletecookie`, {
+      method: 'DELETE',
+      credentials: `${this.option.credentials}`,
+      headers: { 'Content-Type': 'application/json' },
+    })
     );
   }
 }

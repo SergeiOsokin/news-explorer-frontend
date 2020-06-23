@@ -17,6 +17,7 @@ const BUTTON_AUTORIZATION = BODY_DOCUMENT.querySelector('.header__button');
 const LINK_REGISTRATION = BODY_DOCUMENT.querySelector('.popup__link_registration');
 const LINK_ENTRANCE = BODY_DOCUMENT.querySelector('.popup__link_entrance');
 const LINK_SUCCESSFULLY = BODY_DOCUMENT.querySelector('.popup__link_successfully');
+const BUTTON_EXIT = BODY_DOCUMENT.querySelector('.header__button_loggined');
 // errors
 const INPUT_ERRORS = {
   tooShort: 'Должно быть от 2 до 30 символов',
@@ -41,7 +42,14 @@ const BASE_OPTION = 'http://newsapi.org/v2/everything?'
 + 'pageSize=10&'
 + 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
 
+const BASE_OPTION_MAIN_API = {
+  baseUrl: 'http://localhost:3000/',
+  credentials: 'include',
+  header: { 'Content-Type': 'application/json' },
+};
+
 const BUTTON_SHOW_MORE = BODY_DOCUMENT.querySelector('.result__button');
+
 
 export {
   BODY_DOCUMENT,
@@ -67,4 +75,6 @@ export {
   RESULT_FOUND,
   BUTTON_SHOW_MORE,
   RESULT_BLOCK,
+  BUTTON_EXIT,
+  BASE_OPTION_MAIN_API,
 };

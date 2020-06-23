@@ -19,7 +19,7 @@ const FormEntrance = new Form(constant.POPUP_ENTRANCE);
 const FormRegistration = new Form(constant.POPUP_REGISTRATION);
 const FormSearch = new Form(constant.BLOCK_SEARCH);
 const HeaderBlock = new Header(constant.HEADER);
-const MainAPI = new MainApi();
+const MainAPI = new MainApi(constant.BASE_OPTION_MAIN_API);
 const NewsAPI = new NewsApi(constant.BASE_OPTION);
 const CardList = new NewsCardList(constant.ARTICLES_CONTAINER);
 const NewsCardClass = new NewsCard();
@@ -147,6 +147,15 @@ constant.ARTICLES_CONTAINER.addEventListener('click', (event) => {
       })
       .catch((err) => console.log(err));
   }
+});
+
+constant.BUTTON_EXIT.addEventListener('click', () => {
+  MainAPI.removeCookie()
+    .then(() => {
+      HeaderBlock.showSavedArticles();
+      HeaderBlock.backButtonAutorization();
+    })
+    .catch((err) => console.log(err));
 });
 
 MainAPI.getUserData()
