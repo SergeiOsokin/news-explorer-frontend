@@ -9,9 +9,9 @@ const INFO_BLOCK = BODY_DOCUMENT.querySelector('.info-block');
 const ARTICLES_CONTAINER = BODY_DOCUMENT.querySelector('.results-list');
 const BUTTON_EXIT = BODY_DOCUMENT.querySelector('.header__button_loggined');
 const BASE_OPTION_MAIN_API = {
-  baseUrl: 'http://localhost:3000/',
+  // baseUrl: 'http://localhost:3000/',
+  baseUrl: 'https://www.api.news-search.tk/',
   credentials: 'include',
-  header: { 'Content-Type': 'application/json' },
 };
 
 

@@ -2,7 +2,9 @@ NEWS-SEARCH
 
 Проект для поиска новостей по ключевым словам.
 
-Сайт опубликован по адресу: https://sergeiosokin.github.io/news-explorer-frontend/ 
+Сайт опубликован по адресам: 
+https://sergeiosokin.github.io/news-explorer-frontend/ 
+https://www.news-search.tk
 
 В проекте используется следующий стек технологий:
 - REST.API для регистрации/ авторизации пользователей;

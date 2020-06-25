@@ -22,7 +22,6 @@ export default class MainApi {
     );
   }
 
-  // autentification
   signin(email, password) {
     return (fetch(`${this.option.baseUrl}signin`, {
       method: 'POST',
@@ -72,8 +71,7 @@ export default class MainApi {
         image: urlToImage,
       }),
     })
-      .then((res) => res.json())
-    );
+      .then((res) => res.json()));
   }
 
   removeArticle(idArticle) {

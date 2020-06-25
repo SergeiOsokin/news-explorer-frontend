@@ -38,12 +38,19 @@ const NOT_FOUND = BODY_DOCUMENT.querySelector('.result__searching_nothing');
 const ARTICLES_CONTAINER = BODY_DOCUMENT.querySelector('.results-list');
 const RESULT_FOUND = BODY_DOCUMENT.querySelector('.result__found');
 
-const BASE_OPTION = 'http://newsapi.org/v2/everything?'
+const BASE_OPTION_LOCAL = 'http://newsapi.org/v2/everything?'
 + 'pageSize=10&'
 + 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
 
+const BASE_OPTION_DEPLOY = 'https://praktikum.tk/news/v2/everything?'
++ 'pageSize=10&'
++ 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
+
+const IS_DEV = process.env.NODE_ENV === 'development' ? BASE_OPTION_LOCAL : BASE_OPTION_DEPLOY;
+
 const BASE_OPTION_MAIN_API = {
-  baseUrl: 'http://localhost:3000/',
+  // baseUrl: 'http://localhost:3000/',
+  baseUrl: 'https://www.api.news-search.tk/',
   credentials: 'include',
   header: { 'Content-Type': 'application/json' },
 };
@@ -67,7 +74,7 @@ export {
   FORM_REGISTRATION,
   BLOCK_SEARCH,
   PROPS,
-  BASE_OPTION,
+  IS_DEV,
   FORM_SEARCH,
   PRELOUDER,
   NOT_FOUND,

@@ -15,16 +15,17 @@ export default class NewsCardList {
       'afterbegin',
       `
           <div class="result-card__image"
-          style="background-image: url(${urlToImage})">
-          <button class="result-card__icon ${backet}"></button>
-          <p class="result-card__categories ${keyword}">${keyWord}</p>
-        </div>
-        <div class="result-card__description">
-          <p class="result-card__date">${publishedAt}</p>
-          <h4 class="result-card__title">${title}</h4>
-          <p class="result-card__text">${description}</p>
-          <a class="result-card__source" href="${url}" target="_blank">${sourceName}</a>
-        </div>
+            style="background-image: url(${urlToImage})">
+              <button class="result-card__icon ${backet}"></button>
+              <p class="result-card__categories ${keyword}">${keyWord}</p>
+          </div>
+          <div class="result-card__description">
+            <p class="result-card__date">${publishedAt.split('T')[0]}</p>
+            <h4 class="result-card__title">${title}</h4>
+            <p class="result-card__text">${description}</p>
+            <a class="result-card__source" href="${url}" target="_blank">${sourceName}</a>
+          </div>
+
     `,
     );
     resultCard.setAttribute('id', id);
@@ -32,7 +33,6 @@ export default class NewsCardList {
   }
 
   renderResults(articles, keyWord) {
-    this.container.textContent = '';
     for (const element of articles) {
       const article = this._cardTag(
         element.urlToImage,
@@ -71,13 +71,13 @@ export default class NewsCardList {
   //   const articlesArr = articles;
   // }
 
-  // renderLoader() {
+  renderLoader(element) {
+    element.classList.toggle('result__searching_active');
+  }
 
-  // }
-
-  // renderError() {
-
-  // }
+  renderError(err) {
+    this.container.textContent = err;
+  }
 
   dataCard(event) {
     if (event.target.classList.contains('result-card__icon')) {

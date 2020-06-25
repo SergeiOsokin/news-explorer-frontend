@@ -20,37 +20,49 @@ const MainAPI = new MainApi(BASE_OPTION_MAIN_API);
 const ArticlesINFO = new ArticlesInfo(INFO_BLOCK);
 const CardList = new NewsCardList(ARTICLES_CONTAINER);
 
-MainAPI.getArticles(event)
-  .then((data) => {
-    if (data.message) {
-      return Promise.reject(data);
-    }
-    ArticlesINFO.keyWords(data.data);
-    CardList.renderSaveArticle(data.data);
-    ArticlesINFO.amount(data.data);
-  })
-  .catch((err) => ARTICLES_CONTAINER.textContent = err.message);
+const getUserData = () => {
+  MainAPI.getUserData()
+    .then((data) => {
+      if (data.message) {
+        return Promise.reject(data);
+      }
+      PROPS.isLoggedIn = true;
+      PROPS.userName = data.data.name;
+      HeaderBlock.renderName(PROPS);
+    })
+    .catch((err) => {
+      console.log(err);
+      // для сервера и локально
+      window.location.href = '/';
+      // для github
+      // window.location.href = '/news-explorer-frontend/';
+    });
+};
 
-MainAPI.getUserData()
-  .then((data) => {
-    if (data.message) {
-      return Promise.reject(data);
-    }
-    PROPS.isLoggedIn = true;
-    PROPS.userName = data.data.name;
-    HeaderBlock.renderName(PROPS);
-    ArticlesINFO.amountArticles(PROPS.userName);
-  })
-  .catch((err) => alert(err.message));
-
-
+const getArticles = () => {
+  MainAPI.getArticles()
+    .then((data) => {
+      if (data.message) {
+        return Promise.reject(data);
+      }
+      ArticlesINFO.keyWords(data.data);
+      CardList.renderSaveArticle(data.data);
+      ArticlesINFO.amountArticles(BUTTON_EXIT.textContent, data.data.length);
+    })
+    .catch((err) => {
+      ARTICLES_CONTAINER.textContent = err.message;
+      ArticlesINFO.amountArticles(BUTTON_EXIT.textContent, 0);
+      ArticlesINFO.keyWords([]);
+    });
+};
 
 ARTICLES_CONTAINER.addEventListener('click', (event) => {
   if (event.target.classList.contains('result-card__icon')) {
     const id = CardList.getId(event);
     MainAPI.removeArticle(id)
-      .then((data) => {
+      .then(() => {
         CardList.remove(event);
+        getArticles();
       })
       .catch((err) => alert(err));
   }
@@ -59,7 +71,13 @@ ARTICLES_CONTAINER.addEventListener('click', (event) => {
 BUTTON_EXIT.addEventListener('click', () => {
   MainAPI.removeCookie()
     .then(() => {
+      // для сервера и локально
       window.location.href = '/';
+      // для github
+      // window.location.href = '/news-explorer-frontend/';
     })
     .catch((err) => alert(err));
 });
+
+getUserData();
+getArticles();

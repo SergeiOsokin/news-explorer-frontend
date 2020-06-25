@@ -22,6 +22,9 @@ export default class Form {
     if (event.target.validity.patternMismatch) {
       return divError.textContent = 'Некорректные данные';
     }
+    if (event.target.validity.patternMismatch) {
+      return divError.textContent = 'Некорректные данные';
+    }
     return divError.textContent = '';
   }
 

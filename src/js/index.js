@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
 /* eslint-disable no-underscore-dangle */
 import '../css/style.css';
 
@@ -20,14 +22,9 @@ const FormRegistration = new Form(constant.POPUP_REGISTRATION);
 const FormSearch = new Form(constant.BLOCK_SEARCH);
 const HeaderBlock = new Header(constant.HEADER);
 const MainAPI = new MainApi(constant.BASE_OPTION_MAIN_API);
-const NewsAPI = new NewsApi(constant.BASE_OPTION);
+const NewsAPI = new NewsApi(constant.IS_DEV);
 const CardList = new NewsCardList(constant.ARTICLES_CONTAINER);
 const NewsCardClass = new NewsCard();
-// listeners
-constant.BUTTON_AUTORIZATION.addEventListener('click', (event) => {
-  PopupEntrance.open(event);
-  FormEntrance.setValidate(event);
-});
 
 for (const button of constant.BUTTON_CLOSE) {
   button.addEventListener('click', (event) => {
@@ -38,6 +35,30 @@ for (const button of constant.BUTTON_CLOSE) {
     PopupSuccessfully.close();
   });
 }
+// listeners
+constant.BUTTON_AUTORIZATION.addEventListener('click', (event) => {
+  PopupEntrance.open(event);
+  FormEntrance.setValidate(event);
+});
+
+constant.LINK_REGISTRATION.addEventListener('click', (event) => {
+  PopupEntrance.clearContent();
+  PopupEntrance.close();
+  PopupRegistration.open(event);
+  FormRegistration.setValidate(event);
+});
+
+constant.LINK_ENTRANCE.addEventListener('click', (event) => {
+  PopupRegistration.clearContent();
+  PopupRegistration.close();
+  PopupEntrance.open(event);
+});
+
+constant.LINK_SUCCESSFULLY.addEventListener('click', (event) => {
+  PopupSuccessfully.close();
+  PopupEntrance.open(event);
+});
+
 
 constant.FORM_REGISTRATION.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -47,7 +68,6 @@ constant.FORM_REGISTRATION.addEventListener('submit', (event) => {
     constant.FORM_REGISTRATION.name.value,
   )
     .then((res) => {
-      console.log(res.data);
       if (!res.data) {
         return Promise.reject(res);
       }
@@ -76,28 +96,13 @@ constant.FORM_ENTRANCE.addEventListener('submit', (event) => {
     .catch((err) => FormEntrance.setServerError(err.message));
 });
 
-constant.LINK_REGISTRATION.addEventListener('click', (event) => {
-  PopupEntrance.clearContent();
-  PopupEntrance.close();
-  PopupRegistration.open(event);
-  FormRegistration.setValidate(event);
-});
-
-constant.LINK_ENTRANCE.addEventListener('click', (event) => {
-  PopupRegistration.clearContent();
-  PopupRegistration.close();
-  PopupEntrance.open(event);
-});
-
-constant.LINK_SUCCESSFULLY.addEventListener('click', (event) => {
-  PopupSuccessfully.close();
-  PopupEntrance.open(event);
-});
-
 constant.BLOCK_SEARCH.addEventListener('submit', (event) => {
   event.preventDefault();
   const date = utils.getDateFromTo();
-  constant.PRELOUDER.classList.add('result__searching_active');
+  CardList.renderLoader(constant.PRELOUDER);
+  constant.ARTICLES_CONTAINER.textContent = '';
+  constant.RESULT_FOUND.classList.remove('result__found_active');
+  constant.NOT_FOUND.classList.remove('result__searching_active');
   constant.RESULT_BLOCK.scrollIntoView(true);
   NewsAPI.getNews(
     constant.FORM_SEARCH.search.value,
@@ -105,14 +110,16 @@ constant.BLOCK_SEARCH.addEventListener('submit', (event) => {
     date.dateTo,
   )
     .then((data) => {
-      constant.PRELOUDER.classList.remove('result__searching_active');
+      CardList.renderLoader(constant.PRELOUDER);
       if (data.articles.length === 0) {
         return constant.NOT_FOUND.classList.add('result__searching_active');
       }
-      constant.RESULT_FOUND.classList.add('result__found_active');
-      CardList.renderResults(data.articles, constant.FORM_SEARCH.search.value);
+      if (data.articles.length > 0) {
+        constant.RESULT_FOUND.classList.add('result__found_active');
+        CardList.renderResults(data.articles, constant.FORM_SEARCH.search.value);
+      }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => CardList.renderError(err));
 });
 
 constant.ARTICLES_CONTAINER.addEventListener('click', (event) => {
@@ -123,26 +130,24 @@ constant.ARTICLES_CONTAINER.addEventListener('click', (event) => {
       const article = CardList.dataCard(event);
       MainAPI.createArticle(article)
         .then((data) => {
-          if (data) {
-            CardList.setId(event, data.data._id);
-            NewsCardClass.iconSaved(article.icon);
-            return;
+          if (!data.data) {
+            return Promise.reject(data);
           }
-          throw Promise.reject(data);
+          NewsCardClass.iconSaved(article.icon);
+          CardList.setId(event, data.data._id);
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => alert({ 'Ошибка сохранения данных': err }));
     }
   }
 });
 
 constant.ARTICLES_CONTAINER.addEventListener('click', (event) => {
-  const icon = event.target.classList.contains('result-card__icon-active');
-  if (icon) {
+  const iconSaved = event.target.classList.contains('result-card__icon-active');
+  if (iconSaved) {
     const id = CardList.getId(event);
     const article = CardList.dataCard(event);
     MainAPI.removeArticle(id)
-      .then((data) => {
-        console.log(data)
+      .then(() => {
         NewsCardClass.iconDeleted(article.icon);
       })
       .catch((err) => console.log(err));
