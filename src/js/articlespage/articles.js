@@ -3,10 +3,10 @@ import '../../css/articles.css';
 
 import {
   PROPS,
-  HEADER,
-  INFO_BLOCK,
-  ARTICLES_CONTAINER,
-  BUTTON_EXIT,
+  header,
+  infoBlock,
+  articlesContainer,
+  buttonExit,
   BASE_OPTION_MAIN_API,
 } from '../constants/constantArticle';
 
@@ -14,21 +14,23 @@ import Header from '../components/Header';
 import MainApi from '../api/MainApi';
 import ArticlesInfo from '../components/ArticlesInfo';
 import NewsCardList from '../components/NewsCardList';
+import NewsCard from '../components/NewsCard';
 
-const HeaderBlock = new Header(HEADER);
-const MainAPI = new MainApi(BASE_OPTION_MAIN_API);
-const ArticlesINFO = new ArticlesInfo(INFO_BLOCK);
-const CardList = new NewsCardList(ARTICLES_CONTAINER);
+const headerBlock = new Header(header);
+const mainAPI = new MainApi(BASE_OPTION_MAIN_API);
+const articlesINFO = new ArticlesInfo(infoBlock);
+const cardList = new NewsCardList(articlesContainer);
+const newsCardClass = new NewsCard();
 
 const getUserData = () => {
-  MainAPI.getUserData()
+  mainAPI.getUserData()
     .then((data) => {
       if (data.message) {
         return Promise.reject(data);
       }
       PROPS.isLoggedIn = true;
       PROPS.userName = data.data.name;
-      HeaderBlock.renderName(PROPS);
+      headerBlock.renderName(PROPS);
     })
     .catch((err) => {
       console.log(err);
@@ -40,36 +42,48 @@ const getUserData = () => {
 };
 
 const getArticles = () => {
-  MainAPI.getArticles()
+  mainAPI.getArticles()
     .then((data) => {
       if (data.message) {
         return Promise.reject(data);
       }
-      ArticlesINFO.keyWords(data.data);
-      CardList.renderSaveArticle(data.data);
-      ArticlesINFO.amountArticles(BUTTON_EXIT.textContent, data.data.length);
+      articlesINFO.keyWords(data.data);
+      newsCardClass.makeSaveArticle(data.data, cardList);
+      articlesINFO.amountArticles(buttonExit.textContent, data.data.length);
     })
     .catch((err) => {
-      ARTICLES_CONTAINER.textContent = err.message;
-      ArticlesINFO.amountArticles(BUTTON_EXIT.textContent, 0);
-      ArticlesINFO.keyWords([]);
+      articlesContainer.textContent = err.message;
+      articlesINFO.amountArticles(buttonExit.textContent);
+      articlesINFO.keyWords([]);
     });
 };
 
-ARTICLES_CONTAINER.addEventListener('click', (event) => {
+articlesContainer.addEventListener('click', (event) => {
   if (event.target.classList.contains('result-card__icon')) {
-    const id = CardList.getId(event);
-    MainAPI.removeArticle(id)
+    const id = newsCardClass.getId(event);
+    mainAPI.removeArticle(id)
       .then(() => {
-        CardList.remove(event);
-        getArticles();
+        cardList.remove(event);
+        mainAPI.getArticles()
+          .then((data) => {
+            if (data.message) {
+              articlesContainer.textContent = data.message;
+              articlesINFO.amountArticles(buttonExit.textContent);
+              articlesINFO.keyWords([]);
+              return;
+            }
+            articlesINFO.amountArticles(buttonExit.textContent, data.data.length);
+            articlesINFO.keyWords(data.data);
+          });
       })
-      .catch((err) => alert(err));
+      .catch((err) => {
+        articlesContainer.textContent = err;
+      });
   }
 });
 
-BUTTON_EXIT.addEventListener('click', () => {
-  MainAPI.removeCookie()
+buttonExit.addEventListener('click', () => {
+  mainAPI.removeCookie()
     .then(() => {
       // для сервера и локально
       window.location.href = '/';

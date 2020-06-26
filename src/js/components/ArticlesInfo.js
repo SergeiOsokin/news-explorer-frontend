@@ -4,7 +4,7 @@ export default class ArticlesInfo {
     this.element = element;
   }
 
-  amountArticles(name, length) {
+  amountArticles(name, length = 0) {
     switch (length) {
       case 0:
         this.element.querySelector('.info-block__amount').textContent = `${name}, у вас ${length} сохранённых статей`;

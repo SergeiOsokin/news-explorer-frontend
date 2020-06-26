@@ -1,26 +1,27 @@
-const BODY_DOCUMENT = document.querySelector('.body');
+const bodyDocument = document.querySelector('.body');
+const header = bodyDocument.querySelector('.header');
+const infoBlock = bodyDocument.querySelector('.info-block');
+const articlesContainer = bodyDocument.querySelector('.results-list');
+const buttonExit = bodyDocument.querySelector('.header__button_loggined');
+
 const PROPS = {
   isLoggedIn: '',
   userName: '',
 };
 
-const HEADER = BODY_DOCUMENT.querySelector('.header');
-const INFO_BLOCK = BODY_DOCUMENT.querySelector('.info-block');
-const ARTICLES_CONTAINER = BODY_DOCUMENT.querySelector('.results-list');
-const BUTTON_EXIT = BODY_DOCUMENT.querySelector('.header__button_loggined');
 const BASE_OPTION_MAIN_API = {
-  // baseUrl: 'http://localhost:3000/',
-  baseUrl: 'https://www.api.news-search.tk/',
+  baseUrl: 'http://localhost:3000/',
+  // baseUrl: 'https://www.api.news-search.tk/',
   credentials: 'include',
 };
 
 
 export {
-  BODY_DOCUMENT,
+  bodyDocument,
   PROPS,
-  HEADER,
-  INFO_BLOCK,
-  ARTICLES_CONTAINER,
-  BUTTON_EXIT,
+  header,
+  infoBlock,
+  articlesContainer,
+  buttonExit,
   BASE_OPTION_MAIN_API,
 };

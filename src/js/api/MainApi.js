@@ -7,6 +7,15 @@ export default class MainApi {
     this.option = option;
   }
 
+  _getResponseData(res) {
+    if (res.ok) {
+      console.log(res, 'res,ok')
+      return res.json();
+    }
+    console.log(res, 'res, ne ok')
+    return Promise.reject(res);
+  }
+
   signup(email, password, name) {
     return (fetch(`${this.option.baseUrl}signup`, {
       method: 'POST',
@@ -19,6 +28,12 @@ export default class MainApi {
       }),
     })
       .then((res) => res.json())
+      .then((res) => {
+        // if (!res.ok) {     //если запрос выполнился неудачно возвращаем отклоненный промис
+        //   return Promise.reject(`Ошибка: ${res}`);
+        // }
+        return res; //если res.ok===true возвращаем результат запроса
+      })
     );
   }
 
@@ -33,6 +48,12 @@ export default class MainApi {
       }),
     })
       .then((res) => res.json())
+      // .then((res) => {
+      //   // if (!res.ok) {     //если запрос выполнился неудачно возвращаем отклоненный промис
+      //   //   return Promise.reject(`Ошибка: ${res}`);
+      //   // }
+      //   return res; //если res.ok===true возвращаем результат запроса
+      // })
     );
   }
 
@@ -40,8 +61,15 @@ export default class MainApi {
     return (fetch(`${this.option.baseUrl}users/me`, {
       method: 'GET',
       credentials: `${this.option.credentials}`,
+      headers: { 'Content-Type': 'application/json' },
     })
-      .then((res) => res.json())
+    .then((res) => res.json())
+      // .then((res) => {
+      //   if (!res.ok) {//если запрос выполнился неудачно возвращаем отклоненный промис
+      //     return Promise.reject(res);
+      //   }
+      //   return res.json(); //если res.ok===true возвращаем результат запроса
+      // })
     );
   }
 
@@ -49,8 +77,10 @@ export default class MainApi {
     return (fetch(`${this.option.baseUrl}articles`, {
       method: 'GET',
       credentials: `${this.option.credentials}`,
+      headers: { 'Content-Type': 'application/json' },
     })
-      .then((res) => res.json())
+    .then((res) => res.json())
+    //  .then((res) => this._getResponseData(res))
     );
   }
 
@@ -71,7 +101,8 @@ export default class MainApi {
         image: urlToImage,
       }),
     })
-      .then((res) => res.json()));
+      .then((res) => res.json()))
+    //  .then((res) => this._getResponseData(res)));
   }
 
   removeArticle(idArticle) {
@@ -80,8 +111,8 @@ export default class MainApi {
       credentials: `${this.option.credentials}`,
       headers: { 'Content-Type': 'application/json' },
     })
-      .then((res) => res.json())
-    );
+    .then((res) => res.json()))
+     // .then((res) => this._getResponseData(res)));
   }
 
   removeCookie() {

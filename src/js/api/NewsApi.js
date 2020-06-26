@@ -7,12 +7,19 @@ export default class NewsApi {
     this.option = baseoption;
   }
 
+  _getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(`Ошибка сервера: ${res.status}`);
+    }
+    return res.json();
+  }
+
   getNews(text, fromdate, todate) {
     return (
       fetch(`${this.option}q=${text}&from=${fromdate}&to=${todate}`, {
         method: 'GET',
       })
-        .then((res) => res.json())
+        .then((res) => this._getResponseData(res))
     );
   }
 }
