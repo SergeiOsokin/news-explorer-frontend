@@ -4,6 +4,7 @@
 export default class Form {
   constructor(popup) {
     this.form = popup.querySelector('.popup__form');
+    this.errorBlock = this.form.querySelector('.popup__error_text');
     this.button = this.form.querySelector('.button');
   }
 
@@ -29,7 +30,7 @@ export default class Form {
   }
 
   setServerError(err) { // добавляет форме ошибку, пришедшую с сервера;
-    this.form.querySelector('.popup__error_text').textContent = err;
+    this.errorBlock.textContent = err;
   }
 
   _validateForm(form, button) { // валидирует всю форму;

@@ -20,10 +20,6 @@ const linkSuccessfully = bodyDocument.querySelector('.popup__link_successfully')
 const buttonExit = bodyDocument.querySelector('.header__button_loggined');
 
 const header = bodyDocument.querySelector('.header');
-const PROPS = {
-  isLoggedIn: '',
-  userName: '',
-};
 const resultBlock = bodyDocument.querySelector('.result');
 
 const prelouder = bodyDocument.querySelector('.result__searching_download');
@@ -38,7 +34,7 @@ const BASE_OPTION_LOCAL = 'http://newsapi.org/v2/everything?'
 + 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
 
 const BASE_OPTION_DEPLOY = 'https://praktikum.tk/news/v2/everything?'
-+ 'pageSize=10&'
++ 'pageSize=50&'
 + 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
 
 const BASE_OPTION_MAIN_API = {
@@ -46,6 +42,11 @@ const BASE_OPTION_MAIN_API = {
   // baseUrl: 'https://www.api.news-search.tk/',
   credentials: 'include',
   header: { 'Content-Type': 'application/json' },
+};
+
+const PROPS = {
+  isLoggedIn: '',
+  userName: '',
 };
 
 const INPUT_ERRORS = {

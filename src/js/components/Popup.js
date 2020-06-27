@@ -3,22 +3,12 @@
 export default class Popup {
   constructor(element) {
     this.element = element;
-    // this.element.addEventListener('click', this.close);
+    this.form = this.element.querySelector('form');
+    this.errorBlock = this.element.querySelectorAll('.popup__error');
   }
 
-  open(event) {
-    if (event.target.classList.contains('header__button')) {
-      this.element.classList.add('popup_is-opened');
-    }
-    if (event.target.classList.contains('popup__link_registration')) {
-      this.element.classList.add('popup_is-opened');
-    }
-    if (event.target.classList.contains('popup__link_entrance')) {
-      this.element.classList.add('popup_is-opened');
-    }
-    if (event.target.classList.contains('popup__link_successfully')) {
-      this.element.classList.add('popup_is-opened');
-    }
+  open() {
+    this.element.classList.add('popup_is-opened');
   }
 
   close() {
@@ -26,10 +16,8 @@ export default class Popup {
   }
 
   clearContent() {
-    this.element.querySelector('form').reset();
-    this.element.querySelectorAll('.popup__error').forEach((item) => {
-      item.textContent = '';
-    });
+    this.form.reset();
+    this.errorBlock.forEach((item) => item.textContent = '');
   }
 
   setContent() {

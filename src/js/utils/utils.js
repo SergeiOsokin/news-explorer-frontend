@@ -3,7 +3,7 @@ function getDateFromTo() {
   const daysBefore = 7;
   const date = new Date();
   const dtms = date.valueOf();// сколько миллисекунд прошло с 1970
-  // отнимем миллисикунды которые проходят за 7 дней, чтобы получить желаемую дату
+  // отнимем миллисикунды которые проходят за N дней, чтобы получить желаемую дату
   const dateBefore = new Date(dtms - ((24 * 60 * 60 * 1000) * daysBefore));
 
   const month = (d) => {
@@ -22,6 +22,16 @@ function getDateFromTo() {
   };
 }
 
+function setDisabled(element) {
+  element.querySelector('fieldset').setAttribute('disabled', true);
+}
+
+function removeDisabled(element) {
+  element.querySelector('fieldset').removeAttribute('disabled');
+}
+
 export {
   getDateFromTo,
+  setDisabled,
+  removeDisabled,
 };
