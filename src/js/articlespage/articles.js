@@ -83,8 +83,10 @@ const getArticles = () => {
       if (data.message) {
         return Promise.reject(data);
       }
+      let savedArticle = [];
       articlesINFO.keyWords(data.data);
-      newsCardClass.makeSaveArticle(data.data, cardList);
+      savedArticle = newsCardClass.makeSaveArticle(data.data);
+      cardList.renderArticles(savedArticle);
       articlesINFO.amountArticles(buttonExit.textContent, data.data.length);
     })
     .catch((err) => {
@@ -95,41 +97,9 @@ const getArticles = () => {
 };
 // listeners
 articlesContainer.addEventListener('click', removeArticleHandler);
-//  (event) => {
-//   if (event.target.classList.contains('result-card__icon')) {
-//     const id = newsCardClass.getId(event);
-//     mainAPI.removeArticle(id)
-//       .then(() => {
-//         cardList.remove(event);
-//         mainAPI.getArticles()
-//           .then((data) => {
-//             if (data.message) {
-//               articlesContainer.textContent = data.message;
-//               articlesINFO.amountArticles(buttonExit.textContent);
-//               articlesINFO.keyWords([]);
-//               return;
-//             }
-//             articlesINFO.amountArticles(buttonExit.textContent, data.data.length);
-//             articlesINFO.keyWords(data.data);
-//           });
-//       })
-//       .catch((err) => {
-//         articlesContainer.textContent = err;
-//       });
-//   }
-// });
 
 buttonExit.addEventListener('click', removeCookieHandler);
-// () => {
-//   mainAPI.removeCookie()
-//     .then(() => {
-//       // для сервера и локально
-//       window.location.href = '/';
-//       // для github
-//       // window.location.href = '/news-explorer-frontend/';
-//     })
-//     .catch((err) => alert(err));
-// });
+
 // callers
 getUserData();
 getArticles();

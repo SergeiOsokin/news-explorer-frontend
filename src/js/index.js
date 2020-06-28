@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable consistent-return */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-undef */
@@ -25,8 +27,12 @@ const formSearch = new Form(constant.blockSearch);
 const headerBlock = new Header(constant.header);
 const mainAPI = new MainApi(constant.BASE_OPTION_MAIN_API);
 const newsAPI = new NewsApi(constant.isDev);
-const cardList = new NewsCardList(constant.articlesContainer);
+const cardList = new NewsCardList(constant.articlesContainer, constant.buttonShowMore);
 const newsCardClass = new NewsCard();
+// чтобы работать с массивами, которые сделал в данной области
+let arrArticles = [];
+let arrArticlesLink = [];
+
 // function
 function closePopupEscapeHendler() {
   popupEntrance.close();
@@ -53,18 +59,32 @@ function searchNewsHendler(event) {
       .then((data) => {
         cardList.renderLoader(constant.prelouder);
         if (data.articles.length === 0) {
-          return constant.notFound.classList.add('result__searching_active');
+          constant.notFound.classList.add('result__searching_active');
+          constant.buttonShowMore.style.display = 'none';
+          return;
         }
-        if (data.articles.length > 0) {
+        if (data.articles.length > 0 && data.articles.length <= 3) {
           constant.resultFound.classList.add('result__found_active');
-          newsCardClass.makeCard(data.articles, constant.formSearch.search.value, cardList);
+          constant.buttonShowMore.style.display = 'none';
+          // сделаем разметку
+          arrArticles = newsCardClass.makeCard(data.articles, constant.formSearch.search.value);
+          cardList.renderArticles(arrArticles); // отправим массив с разметкой на отрисовку
+          return;
+        }
+        if (data.articles.length > 3) {
+          constant.resultFound.classList.add('result__found_active');
+          constant.buttonShowMore.style.display = 'block';
+          // сделаем разметку карточкам
+          arrArticles = newsCardClass.makeCard(data.articles, constant.formSearch.search.value);
+          cardList.renderArticles(arrArticles.slice(0, 3), arrArticlesLink); // отправим первые 3 на отрисовку
+          return arrArticles.splice(0, 3); // оставшиеся вернем, чтобы отображать по кнопке
         }
       })
       .catch((err) => cardList.renderError(err));
   } else {
     cardList.renderLoader(constant.prelouder);
     constant.resultFound.classList.add('result__found_active');
-    cardList.renderError('Отсутствует подключение к интренету');
+    cardList.renderError(constant.OTHER_ERRORS.noInternet);
   }
 }
 
@@ -126,33 +146,29 @@ for (const button of constant.buttonClose) {
 
 function saveArticleHendler(event) {
   const icon = event.target.classList.contains('result-card__icon');
-  if (icon) {
+  const iconSaved = event.target.classList.contains('result-card__icon-active');
+  if (iconSaved) {
+    const id = newsCardClass.getId(event);
+    const article = newsCardClass.dataCard(event);
+    return mainAPI.removeArticle(id)
+      .then(() => {
+        newsCardClass.iconDeleted(article.icon);
+      })
+      .catch((err) => alert(constant.OTHER_ERRORS.failDeleteArt + err));
+  } if (icon) {
     const iconActive = newsCardClass.renderIcon(event, constant.buttonAutorization);
     if (iconActive) {
       const article = newsCardClass.dataCard(event);
-      mainAPI.createArticle(article)
+      return mainAPI.createArticle(article)
         .then((data) => {
-          if (!data.data) {
+          if (data.message) {
             return Promise.reject(data);
           }
           newsCardClass.iconSaved(article.icon);
           newsCardClass.setId(event, data.data._id);
         })
-        .catch((err) => alert({ 'Ошибка сохранения данных': err }));
+        .catch((err) => alert(constant.OTHER_ERRORS.failSaveArt + err.message));
     }
-  }
-}
-
-function removeArticleHendler(event) {
-  const iconSaved = event.target.classList.contains('result-card__icon-active');
-  if (iconSaved) {
-    const id = newsCardClass.getId(event);
-    const article = newsCardClass.dataCard(event);
-    mainAPI.removeArticle(id)
-      .then(() => {
-        newsCardClass.iconDeleted(article.icon);
-      })
-      .catch((err) => console.log(err));
   }
 }
 
@@ -162,7 +178,7 @@ function removeCookie() {
       headerBlock.showSavedArticles();
       headerBlock.backButtonAutorization();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => alert(constant.OTHER_ERRORS.failUnlog + err));
 }
 
 function isLogged() {
@@ -175,7 +191,16 @@ function isLogged() {
       constant.PROPS.userName = data.data.name;
       headerBlock.render(constant.PROPS);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err.message));
+}
+
+function showMore() {
+  cardList.showMore(arrArticles.slice(0, 3));
+  if (arrArticles.length <= 3) {
+    constant.buttonShowMore.style.display = 'none';
+    return;
+  }
+  return arrArticles.splice(0, 3);
 }
 // listeners
 constant.buttonAutorization.addEventListener('click', (event) => {
@@ -227,6 +252,8 @@ constant.popupRegistration.addEventListener('click', (event) => {
   }
 });
 
+constant.buttonShowMore.addEventListener('click', showMore);
+
 constant.formRegistration.addEventListener('submit', registrationHendler);
 
 constant.formEntrance.addEventListener('submit', entranceHendler);
@@ -235,10 +262,15 @@ constant.blockSearch.addEventListener('submit', searchNewsHendler);
 
 constant.articlesContainer.addEventListener('click', saveArticleHendler);
 
-constant.articlesContainer.addEventListener('click', removeArticleHendler);
-
 constant.buttonExit.addEventListener('click', removeCookie);
 
 // callers
 isLogged();
 formSearch.setValidate();
+
+mainAPI.getArticles()
+  .then((data) => {
+    for (const article of data.data) {
+      return arrArticlesLink.push(article.link);
+    }
+  });

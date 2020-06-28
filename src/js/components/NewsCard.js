@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable consistent-return */
@@ -24,34 +26,55 @@ export default class NewsCard {
     element.classList.remove('result-card__icon-active');
   }
 
-  // работает
-  _cardTag(urlToImage, publishedAt, title, description, url, sourceName, keyWord, backet = '', keyword = '', id = '') {
+  // ощущения не те, зато безопасно
+  _cardTag(urlToImage, publishedAt, title, description, url, sourceName, keyWord, backet = 'empt', keywordActive = 'empt', id = '') {
+    const indexSplite = 0;
     const resultCard = document.createElement('div');
-    resultCard.classList.add('result-card');
-    resultCard.insertAdjacentHTML(
-      'afterbegin',
-      `
-          <div class="result-card__image"
-            style="background-image: url(${urlToImage})">
-              <button class="result-card__icon ${backet}"></button>
-              <p class="result-card__categories ${keyword}">${keyWord}</p>
-          </div>
-          <div class="result-card__description">
-            <p class="result-card__date">${publishedAt.split('T')[0]}</p>
-            <h4 class="result-card__title">${title}</h4>
-            <p class="result-card__text">${description}</p>
-            <a class="result-card__source" href="${url}" target="_blank">${sourceName}</a>
-          </div>
+    const resultcard__image = document.createElement('div');
+    const resultcard__icon = document.createElement('button');
+    const resultcard__categories = document.createElement('p');
+    const resultcard__description = document.createElement('div');
+    const resultcard__date = document.createElement('p');
+    const resultcard__title = document.createElement('h4');
+    const resultcard__text = document.createElement('p');
+    const resultcard__source = document.createElement('a');
 
-    `,
-    );
+    resultCard.classList.add('result-card');
+    resultcard__image.classList.add('result-card__image');
+    resultcard__icon.classList.add('result-card__icon', `${backet}`);
+    resultcard__categories.classList.add('result-card__categories', `${keywordActive}`);
+    resultcard__description.classList.add('result-card__description');
+    resultcard__date.classList.add('result-card__date');
+    resultcard__title.classList.add('result-card__title');
+    resultcard__text.classList.add('result-card__text');
+    resultcard__source.classList.add('result-card__source');
+
+    resultCard.appendChild(resultcard__image);
+    resultcard__image.appendChild(resultcard__icon);
+    resultcard__image.appendChild(resultcard__categories);
+    resultCard.appendChild(resultcard__description);
+    resultcard__description.appendChild(resultcard__date);
+    resultcard__description.appendChild(resultcard__title);
+    resultcard__description.appendChild(resultcard__text);
+    resultcard__description.appendChild(resultcard__source);
+
     resultCard.setAttribute('id', id);
+    resultcard__source.setAttribute('href', url);
+
+    resultcard__image.style.backgroundImage = `url(${urlToImage})`;
+    resultcard__title.textContent = title;
+    resultcard__text.textContent = description;
+    resultcard__source.textContent = sourceName;
+    resultcard__categories.textContent = keyWord;
+    resultcard__date.textContent = publishedAt.split('T')[indexSplite];
+
     return resultCard;
   }
 
-  makeCard(articles, keyWord, cardList) {
+  makeCard(articles, keyWord) {
+    const article = [];
     for (const element of articles) {
-      const article = this._cardTag(
+      article.push(this._cardTag(
         element.urlToImage,
         element.publishedAt,
         element.title,
@@ -59,16 +82,17 @@ export default class NewsCard {
         element.url,
         element.source.name,
         keyWord,
-      );
-      cardList.renderArticles(article);
+      ));
     }
+    return article;
   }
 
-  makeSaveArticle(articles, cardList) {
+  makeSaveArticle(articles) {
+    const article = [];
     const backet = 'result-card__icon_backet';
-    const keyword = 'result-card__categories_active';
+    const keywordActive = 'result-card__categories_active';
     for (const element of articles) {
-      const article = this._cardTag(
+      article.push(this._cardTag(
         element.image,
         element.date,
         element.title,
@@ -77,14 +101,13 @@ export default class NewsCard {
         element.source,
         element.keyword,
         backet,
-        keyword,
+        keywordActive,
         element._id,
-      );
-      cardList.renderArticles(article);
+      ));
     }
+    return article;
   }
 
-  // тут норм
   dataCard(event) {
     if (event.target.classList.contains('result-card__icon')) {
       const article = event.target.closest('.result-card');

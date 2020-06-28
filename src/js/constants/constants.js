@@ -30,7 +30,7 @@ const resultFound = bodyDocument.querySelector('.result__found');
 
 
 const BASE_OPTION_LOCAL = 'http://newsapi.org/v2/everything?'
-+ 'pageSize=10&'
++ 'pageSize=50&'
 + 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
 
 const BASE_OPTION_DEPLOY = 'https://praktikum.tk/news/v2/everything?'
@@ -53,6 +53,13 @@ const INPUT_ERRORS = {
   tooShort: 'Должно быть от 2 до 30 символов',
   valueMissing: 'Это обязательное поле',
   patternMismatch: 'Введите корректный email',
+};
+
+const OTHER_ERRORS = {
+  failUnlog: 'Не удается выполнить выход ',
+  failSaveArt: 'Ошибка при сохранении статьи ',
+  failDeleteArt: 'Ошибка при удалении статьи ',
+  noInternet: 'Отсутствует подключение к интренету',
 };
 
 const isDev = process.env.NODE_ENV === 'development' ? BASE_OPTION_LOCAL : BASE_OPTION_DEPLOY;
@@ -83,4 +90,5 @@ export {
   resultBlock,
   buttonExit,
   BASE_OPTION_MAIN_API,
+  OTHER_ERRORS,
 };
