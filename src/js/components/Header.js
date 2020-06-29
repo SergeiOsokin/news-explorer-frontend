@@ -27,10 +27,12 @@ export default class Header {
     if (this.buttonDefault) {
       this.buttonDefault.classList.add('disabled');
       this.buttonLoggined.classList.remove('disabled');
-      this.buttonLoggined.textContent = name;
+      this.buttonLoggined.textContent = `${name} `;
+      this.buttonLoggined.insertAdjacentHTML('beforeEnd', '<span class="button__image_black"></span>');
     }
     this.buttonLoggined.classList.remove('disabled');
-    this.buttonLoggined.textContent = name;
+    this.buttonLoggined.textContent = `${name} `;
+    this.buttonLoggined.insertAdjacentHTML('beforeEnd', '<span class="button__image"></span>');
   }
 
   backButtonAutorization() {

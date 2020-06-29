@@ -9,7 +9,7 @@ export default class MainApi {
 
   _getResponseData(res) {
     if (!res.ok) {
-      return Promise.resolve(res.json());
+      return Promise.reject(res);
     }
     return res.json();
   }
@@ -25,7 +25,6 @@ export default class MainApi {
         name,
       }),
     })
-      // .then((res) => res.json())
       .then((res) => this._getResponseData(res))
     );
   }
@@ -40,7 +39,6 @@ export default class MainApi {
         password,
       }),
     })
-      // .then((res) => res.json())
       .then((res) => this._getResponseData(res))
     );
   }
@@ -61,7 +59,6 @@ export default class MainApi {
       credentials: `${this.option.credentials}`,
       headers: { 'Content-Type': 'application/json' },
     })
-      // .then((res) => res.json())
       .then((res) => this._getResponseData(res))
     );
   }
@@ -83,7 +80,6 @@ export default class MainApi {
         image: urlToImage,
       }),
     })
-      // .then((res) => res.json()));
       .then((res) => this._getResponseData(res)));
   }
 
@@ -93,7 +89,6 @@ export default class MainApi {
       credentials: `${this.option.credentials}`,
       headers: { 'Content-Type': 'application/json' },
     })
-      // .then((res) => res.json()));
       .then((res) => this._getResponseData(res)));
   }
 

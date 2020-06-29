@@ -38,8 +38,8 @@ const BASE_OPTION_DEPLOY = 'https://praktikum.tk/news/v2/everything?'
 + 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
 
 const BASE_OPTION_MAIN_API = {
-  baseUrl: 'http://localhost:3000/',
-  // baseUrl: 'https://www.api.news-search.tk/',
+  // baseUrl: 'http://localhost:3000/',
+  baseUrl: 'https://www.api.news-search.tk/',
   credentials: 'include',
   header: { 'Content-Type': 'application/json' },
 };

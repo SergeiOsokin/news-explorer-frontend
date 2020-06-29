@@ -34,6 +34,20 @@ let arrArticles = [];
 let arrArticlesLink = [];
 
 // function
+function getUserArticles() {
+  mainAPI.getArticles()
+    .then((data) => {
+      for (const article of data.data) {
+        arrArticlesLink.push([article.link, article._id]);
+      }
+      return arrArticlesLink;
+    })
+    .catch((err) => {
+      err.text().then((error) => {
+        console.log(JSON.parse(error).message);
+      });
+    });
+}
 function closePopupEscapeHendler() {
   popupEntrance.close();
   popupEntrance.clearContent();
@@ -50,6 +64,7 @@ function searchNewsHendler(event) {
   constant.resultFound.classList.remove('result__found_active');
   constant.notFound.classList.remove('result__searching_active');
   constant.resultBlock.scrollIntoView(true);
+  getUserArticles();
   if (navigator.onLine) {
     newsAPI.getNews(
       constant.formSearch.search.value,
@@ -76,11 +91,16 @@ function searchNewsHendler(event) {
           constant.buttonShowMore.style.display = 'block';
           // сделаем разметку карточкам
           arrArticles = newsCardClass.makeCard(data.articles, constant.formSearch.search.value);
-          cardList.renderArticles(arrArticles.slice(0, 3), arrArticlesLink); // отправим первые 3 на отрисовку
+          // отправим первые 3 на отрисовку
+          cardList.renderArticles(arrArticles.slice(0, 3), arrArticlesLink);
           return arrArticles.splice(0, 3); // оставшиеся вернем, чтобы отображать по кнопке
         }
       })
-      .catch((err) => cardList.renderError(err));
+      .catch((err) => {
+        err.text().then((error) => {
+          cardList.renderError(JSON.parse(error).message);
+        });
+      });
   } else {
     cardList.renderLoader(constant.prelouder);
     constant.resultFound.classList.add('result__found_active');
@@ -96,9 +116,6 @@ function entranceHendler(event) {
     constant.formEntrance.passwordenter.value,
   )
     .then((res) => {
-      if (!res.data) {
-        return Promise.reject(res);
-      }
       utils.removeDisabled(constant.formEntrance);
       popupEntrance.clearContent();
       popupEntrance.close();
@@ -106,8 +123,10 @@ function entranceHendler(event) {
       headerBlock.changeButton(res.data);
     })
     .catch((err) => {
-      utils.removeDisabled(constant.formEntrance);
-      formEntrance.setServerError(err.message);
+      err.text().then((error) => {
+        utils.removeDisabled(constant.formEntrance);
+        formEntrance.setServerError(JSON.parse(error).message);
+      });
     });
 }
 
@@ -119,18 +138,17 @@ function registrationHendler(event) {
     constant.formRegistration.passwordreg.value,
     constant.formRegistration.name.value,
   )
-    .then((res) => {
-      if (!res.data) {
-        return Promise.reject(res);
-      }
+    .then(() => {
       utils.removeDisabled(constant.formRegistration);
       popupRegistration.clearContent();
       popupRegistration.close();
       popupSuccessfully.setContent();
     })
     .catch((err) => {
-      utils.removeDisabled(constant.formRegistration);
-      formRegistration.setServerError(err.message);
+      err.text().then((error) => {
+        utils.removeDisabled(constant.formRegistration);
+        formRegistration.setServerError(JSON.parse(error).message);
+      });
     });
 }
 
@@ -154,20 +172,25 @@ function saveArticleHendler(event) {
       .then(() => {
         newsCardClass.iconDeleted(article.icon);
       })
-      .catch((err) => alert(constant.OTHER_ERRORS.failDeleteArt + err));
+      .catch((err) => {
+        err.text().then((error) => {
+          alert(constant.OTHER_ERRORS.failDeleteArt + JSON.parse(error).message);
+        });
+      });
   } if (icon) {
     const iconActive = newsCardClass.renderIcon(event, constant.buttonAutorization);
     if (iconActive) {
       const article = newsCardClass.dataCard(event);
       return mainAPI.createArticle(article)
         .then((data) => {
-          if (data.message) {
-            return Promise.reject(data);
-          }
           newsCardClass.iconSaved(article.icon);
           newsCardClass.setId(event, data.data._id);
         })
-        .catch((err) => alert(constant.OTHER_ERRORS.failSaveArt + err.message));
+        .catch((err) => {
+          err.text().then((error) => {
+            alert(constant.OTHER_ERRORS.failSaveArt + JSON.parse(error).message);
+          });
+        });
     }
   }
 }
@@ -184,18 +207,18 @@ function removeCookie() {
 function isLogged() {
   mainAPI.getUserData()
     .then((data) => {
-      if (data.message) {
-        return Promise.reject(data);
-      }
       constant.PROPS.isLoggedIn = true;
       constant.PROPS.userName = data.data.name;
       headerBlock.render(constant.PROPS);
     })
-    .catch((err) => console.log(err.message));
+    .catch((err) => {
+      err.text()
+        .then((error) => console.log(JSON.parse(error).message));
+    });
 }
 
 function showMore() {
-  cardList.showMore(arrArticles.slice(0, 3));
+  cardList.showMore(arrArticles.slice(0, 3), arrArticlesLink);
   if (arrArticles.length <= 3) {
     constant.buttonShowMore.style.display = 'none';
     return;
@@ -268,9 +291,3 @@ constant.buttonExit.addEventListener('click', removeCookie);
 isLogged();
 formSearch.setValidate();
 
-mainAPI.getArticles()
-  .then((data) => {
-    for (const article of data.data) {
-      return arrArticlesLink.push(article.link);
-    }
-  });

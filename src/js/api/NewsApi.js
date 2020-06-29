@@ -9,7 +9,7 @@ export default class NewsApi {
 
   _getResponseData(res) {
     if (!res.ok) {
-      return Promise.reject(`Ошибка сервера: ${res.status}`);
+      return Promise.reject(`Ошибка сервера: ${res}`);
     }
     return res.json();
   }

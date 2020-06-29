@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 /* eslint-disable no-undef */
 import '../../css/articles.css';
 
@@ -8,6 +9,7 @@ import {
   articlesContainer,
   buttonExit,
   BASE_OPTION_MAIN_API,
+  ERRORS,
 } from '../constants/constantArticle';
 
 import Header from '../components/Header';
@@ -30,18 +32,21 @@ function removeArticleHandler(event) {
         cardList.remove(event);
         mainAPI.getArticles()
           .then((data) => {
-            if (data.message) {
-              articlesContainer.textContent = data.message;
-              articlesINFO.amountArticles(buttonExit.textContent);
-              articlesINFO.keyWords([]);
-              return;
-            }
             articlesINFO.amountArticles(buttonExit.textContent, data.data.length);
             articlesINFO.keyWords(data.data);
+          })
+          .catch((err) => {
+            err.text().then((error) => {
+              articlesContainer.textContent = JSON.parse(error).message;
+              articlesINFO.amountArticles(buttonExit.textContent);
+              articlesINFO.keyWords([]);
+            });
           });
       })
       .catch((err) => {
-        articlesContainer.textContent = err;
+        err.text().then((error) => {
+          alert(ERRORS + error.message);
+        });
       });
   }
 }
@@ -55,34 +60,29 @@ function removeCookieHandler() {
       // window.location.href = '/news-explorer-frontend/';
     })
     .catch((err) => alert(err));
-// });
 }
 
 const getUserData = () => {
   mainAPI.getUserData()
     .then((data) => {
-      if (data.message) {
-        return Promise.reject(data);
-      }
       PROPS.isLoggedIn = true;
       PROPS.userName = data.data.name;
       headerBlock.renderName(PROPS);
     })
     .catch((err) => {
-      console.log(err);
-      // для сервера и локально
-      window.location.href = '/';
-      // для github
-      // window.location.href = '/news-explorer-frontend/';
+      err.text().then((error) => {
+        console.log(error.message);
+        // для сервера и локально
+        window.location.href = '/';
+        // для github
+        // window.location.href = '/news-explorer-frontend/';
+      });
     });
 };
 
 const getArticles = () => {
   mainAPI.getArticles()
     .then((data) => {
-      if (data.message) {
-        return Promise.reject(data);
-      }
       let savedArticle = [];
       articlesINFO.keyWords(data.data);
       savedArticle = newsCardClass.makeSaveArticle(data.data);
@@ -90,9 +90,12 @@ const getArticles = () => {
       articlesINFO.amountArticles(buttonExit.textContent, data.data.length);
     })
     .catch((err) => {
-      articlesContainer.textContent = err.message;
-      articlesINFO.amountArticles(buttonExit.textContent);
-      articlesINFO.keyWords([]);
+      err.text().then((error) => {
+        console.log(JSON.parse(error).message);
+        articlesContainer.textContent = JSON.parse(error).message;
+        articlesINFO.amountArticles(buttonExit.textContent);
+        articlesINFO.keyWords([]);
+      });
     });
 };
 // listeners
