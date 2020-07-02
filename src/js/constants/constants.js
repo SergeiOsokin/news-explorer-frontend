@@ -17,11 +17,11 @@ const buttonAutorization = bodyDocument.querySelector('.header__button');
 const linkRegistration = bodyDocument.querySelector('.popup__link_registration');
 const linkEntrance = bodyDocument.querySelector('.popup__link_entrance');
 const linkSuccessfully = bodyDocument.querySelector('.popup__link_successfully');
-const buttonExit = bodyDocument.querySelector('.header__button_loggined');
 
 const header = bodyDocument.querySelector('.header');
-const resultBlock = bodyDocument.querySelector('.result');
+const headerMenu = bodyDocument.querySelector('.header__checkbox');
 
+const resultBlock = bodyDocument.querySelector('.result');
 const prelouder = bodyDocument.querySelector('.result__searching_download');
 const notFound = bodyDocument.querySelector('.result__searching_nothing');
 const buttonShowMore = bodyDocument.querySelector('.result__button');
@@ -53,6 +53,7 @@ const INPUT_ERRORS = {
   tooShort: 'Должно быть от 2 до 30 символов',
   valueMissing: 'Это обязательное поле',
   patternMismatch: 'Введите корректный email',
+  failFetch: 'Не удалось выполнить запрос',
 };
 
 const OTHER_ERRORS = {
@@ -60,6 +61,7 @@ const OTHER_ERRORS = {
   failSaveArt: 'Ошибка при сохранении статьи ',
   failDeleteArt: 'Ошибка при удалении статьи ',
   noInternet: 'Отсутствует подключение к интренету',
+  tryLater: 'Неизвестная ошибка. Попробуйте позже',
 };
 
 const isDev = process.env.NODE_ENV === 'development' ? BASE_OPTION_LOCAL : BASE_OPTION_DEPLOY;
@@ -88,7 +90,7 @@ export {
   resultFound,
   buttonShowMore,
   resultBlock,
-  buttonExit,
+  headerMenu,
   BASE_OPTION_MAIN_API,
   OTHER_ERRORS,
 };

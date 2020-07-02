@@ -13,14 +13,15 @@ export default class NewsCardList {
   renderArticles(article, arrArticlesLink = '') {
     const INDEX_URL_ART = 0;
     const INDEX_ID_ART = 1;
+
     if (arrArticlesLink) { // если есть массив, значит выполняется поиск статей
-      for (const element of article) {
+      for (const element of article) { // достаем каждую статью
         const urlSource = element.querySelector('.result-card__source').getAttribute('href');
         const divForId = element.querySelector('.result-card__icon').closest('.result-card');
-        const needElementArr = arrArticlesLink.find((item) => item[INDEX_URL_ART] === urlSource);
         // ищем совпадения url статей найденых и тех, что есть
+        const needElementArr = arrArticlesLink.find((item) => item[INDEX_URL_ART] === urlSource);
+        // нашли совпадение, для найденного элемента закрасим флаг
         if (needElementArr) {
-          // нашли совпадение, для найденного элемента закрасим флаг
           element.querySelector('.result-card__icon').classList.add('result-card__icon-active');
           divForId.setAttribute('id', needElementArr[INDEX_ID_ART]);
         }

@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
@@ -28,46 +29,31 @@ export default class NewsCard {
 
   // ощущения не те, зато безопасно
   _cardTag(urlToImage, publishedAt, title, description, url, sourceName, keyWord, backet = 'empt', keywordActive = 'empt', id = '') {
-    const indexSplite = 0;
-    const resultCard = document.createElement('div');
-    const resultcard__image = document.createElement('div');
-    const resultcard__icon = document.createElement('button');
-    const resultcard__categories = document.createElement('p');
-    const resultcard__description = document.createElement('div');
-    const resultcard__date = document.createElement('p');
-    const resultcard__title = document.createElement('h4');
-    const resultcard__text = document.createElement('p');
-    const resultcard__source = document.createElement('a');
+    const INDEXSPLITE = 0;
+    // функция sanitizeHTML  для борьбы с xss - не позволяет вставлять в данных пользователя html
+    const template = document.createElement('div');
+    template.insertAdjacentHTML('beforeend', `
+        <div class="result-card" id="${sanitizeHTML(id)}">
+          <div class="result-card__image"
+            style="background-image: url(${sanitizeHTML(urlToImage)})">
+              <button class="result-card__icon ${sanitizeHTML(backet)}"></button>
+              <p class="result-card__categories ${sanitizeHTML(keywordActive)}">${sanitizeHTML(keyWord)}</p>
+          </div>
+          <div class="result-card__description">
+            <p class="result-card__date">${sanitizeHTML(publishedAt.split('T')[INDEXSPLITE])}</p>
+            <h4 class="result-card__title">${sanitizeHTML(title)}</h4>
+            <p class="result-card__text">${sanitizeHTML(description)}</p>
+            <a class="result-card__source" href="${sanitizeHTML(url)}" target="_blank">${sanitizeHTML(sourceName)}</a>
+          </div>
+        </div>`);
 
-    resultCard.classList.add('result-card');
-    resultcard__image.classList.add('result-card__image');
-    resultcard__icon.classList.add('result-card__icon', `${backet}`);
-    resultcard__categories.classList.add('result-card__categories', `${keywordActive}`);
-    resultcard__description.classList.add('result-card__description');
-    resultcard__date.classList.add('result-card__date');
-    resultcard__title.classList.add('result-card__title');
-    resultcard__text.classList.add('result-card__text');
-    resultcard__source.classList.add('result-card__source');
+    const resultCard = template.firstElementChild;
 
-    resultCard.appendChild(resultcard__image);
-    resultcard__image.appendChild(resultcard__icon);
-    resultcard__image.appendChild(resultcard__categories);
-    resultCard.appendChild(resultcard__description);
-    resultcard__description.appendChild(resultcard__date);
-    resultcard__description.appendChild(resultcard__title);
-    resultcard__description.appendChild(resultcard__text);
-    resultcard__description.appendChild(resultcard__source);
-
-    resultCard.setAttribute('id', id);
-    resultcard__source.setAttribute('href', url);
-
-    resultcard__image.style.backgroundImage = `url(${urlToImage})`;
-    resultcard__title.textContent = title;
-    resultcard__text.textContent = description;
-    resultcard__source.textContent = sourceName;
-    resultcard__categories.textContent = keyWord;
-    resultcard__date.textContent = publishedAt.split('T')[indexSplite];
-
+    function sanitizeHTML(str) {
+      const temp = document.createElement('div');
+      temp.textContent = str;
+      return temp.innerHTML;
+    }
     return resultCard;
   }
 

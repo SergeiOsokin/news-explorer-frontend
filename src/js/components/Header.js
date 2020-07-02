@@ -3,7 +3,6 @@ export default class Header {
     this.header = header;
     this.savedArtPage = this.header.querySelector('.header__menu-articles');
     this.buttonDefault = this.header.querySelector('.header__button');
-    this.buttonLoggined = this.header.querySelector('.header__button_loggined');
   }
 
   render({ isLoggedIn, userName }) {
@@ -15,7 +14,7 @@ export default class Header {
 
   renderName({ isLoggedIn, userName }) {
     if (isLoggedIn) {
-      this.changeButton(userName);
+      this.changeButtonSavePage(userName);
     }
   }
 
@@ -24,20 +23,18 @@ export default class Header {
   }
 
   changeButton(name) {
-    if (this.buttonDefault) {
-      this.buttonDefault.classList.add('disabled');
-      this.buttonLoggined.classList.remove('disabled');
-      this.buttonLoggined.textContent = `${name} `;
-      this.buttonLoggined.insertAdjacentHTML('beforeEnd', '<span class="button__image_black"></span>');
-    }
-    this.buttonLoggined.classList.remove('disabled');
-    this.buttonLoggined.textContent = `${name} `;
-    this.buttonLoggined.insertAdjacentHTML('beforeEnd', '<span class="button__image"></span>');
+    this.buttonDefault.classList.add('header__button_loggined');
+    this.buttonDefault.textContent = `${name} `;
+    this.buttonDefault.insertAdjacentHTML('beforeEnd', '<span class="button__image"></span>');
   }
 
   backButtonAutorization() {
-    this.buttonDefault.classList.remove('disabled');
-    this.buttonLoggined.classList.add('disabled');
-    this.buttonLoggined.textContent = '';
+    this.buttonDefault.classList.remove('header__button_loggined');
+    this.buttonDefault.textContent = 'Авторизация';
+  }
+
+  changeButtonSavePage(name) {
+    this.buttonDefault.textContent = `${name} `;
+    this.buttonDefault.insertAdjacentHTML('beforeEnd', '<span class="button__image_black"></span>');
   }
 }

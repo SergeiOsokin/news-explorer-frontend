@@ -97,9 +97,15 @@ function searchNewsHendler(event) {
         }
       })
       .catch((err) => {
-        err.text().then((error) => {
-          cardList.renderError(JSON.parse(error).message);
-        });
+        if (!err.ok) {
+          err.text().then((error) => {
+            cardList.renderError(JSON.parse(error).message);
+          });
+        }
+        throw unknownOther;
+      })
+      .catch(() => {
+        cardList.renderError(constant.OTHER_ERRORS.tryLater);
       });
   } else {
     cardList.renderLoader(constant.prelouder);
@@ -123,10 +129,17 @@ function entranceHendler(event) {
       headerBlock.changeButton(res.data);
     })
     .catch((err) => {
-      err.text().then((error) => {
-        utils.removeDisabled(constant.formEntrance);
-        formEntrance.setServerError(JSON.parse(error).message);
-      });
+      utils.removeDisabled(constant.formEntrance);
+      if (!err.ok) {
+        err.text().then((error) => {
+          formEntrance.setServerError(JSON.parse(error).message);
+        });
+        return;
+      }
+      throw unknownOther;
+    })
+    .catch(() => {
+      formEntrance.setServerError(constant.OTHER_ERRORS.tryLater);
     });
 }
 
@@ -145,10 +158,17 @@ function registrationHendler(event) {
       popupSuccessfully.setContent();
     })
     .catch((err) => {
-      err.text().then((error) => {
-        utils.removeDisabled(constant.formRegistration);
-        formRegistration.setServerError(JSON.parse(error).message);
-      });
+      utils.removeDisabled(constant.formRegistration);
+      if (!err.ok) {
+        err.text().then((error) => {
+          formRegistration.setServerError(JSON.parse(error).message);
+        });
+        return;
+      }
+      throw unknownOther;
+    })
+    .catch(() => {
+      formRegistration.setServerError(constant.OTHER_ERRORS.tryLater);
     });
 }
 
@@ -227,6 +247,10 @@ function showMore() {
 }
 // listeners
 constant.buttonAutorization.addEventListener('click', (event) => {
+  constant.headerMenu.checked = false;
+  if (event.target.classList.contains('header__button_loggined')) {
+    return removeCookie();
+  }
   popupEntrance.open(event);
   formEntrance.setValidate(event);
 });
@@ -255,20 +279,20 @@ window.addEventListener('keydown', (event) => {
   }
 });
 
-constant.popupEntrance.addEventListener('click', (event) => {
+constant.popupEntrance.addEventListener('mousedown', (event) => {
   if (event.target.classList.contains('popup')) {
     popupEntrance.close();
     popupEntrance.clearContent();
   }
 });
 
-constant.popupSuccessfully.addEventListener('click', (event) => {
+constant.popupSuccessfully.addEventListener('mousedown', (event) => {
   if (event.target.classList.contains('popup')) {
     popupSuccessfully.close();
   }
 });
 
-constant.popupRegistration.addEventListener('click', (event) => {
+constant.popupRegistration.addEventListener('mousedown', (event) => {
   if (event.target.classList.contains('popup')) {
     popupRegistration.close();
     popupRegistration.clearContent();
@@ -284,8 +308,6 @@ constant.formEntrance.addEventListener('submit', entranceHendler);
 constant.blockSearch.addEventListener('submit', searchNewsHendler);
 
 constant.articlesContainer.addEventListener('click', saveArticleHendler);
-
-constant.buttonExit.addEventListener('click', removeCookie);
 
 // callers
 isLogged();
