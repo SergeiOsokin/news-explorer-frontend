@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable prefer-const */
 /* eslint-disable consistent-return */
 /* eslint-disable no-restricted-globals */
@@ -43,10 +44,14 @@ function getUserArticles() {
       return arrArticlesLink;
     })
     .catch((err) => {
-      err.text().then((error) => {
-        console.log(JSON.parse(error).message);
-      });
-    });
+      if (!err.ok) {
+        err.text().then((error) => {
+          console.log(JSON.parse(error).message);
+        });
+      }
+      throw unknownOther;
+    })
+    .catch(() => console.log(constant.OTHER_ERRORS.serverBreak));
 }
 function closePopupEscapeHendler() {
   popupEntrance.close();
@@ -232,9 +237,13 @@ function isLogged() {
       headerBlock.render(constant.PROPS);
     })
     .catch((err) => {
-      err.text()
-        .then((error) => console.log(JSON.parse(error).message));
-    });
+      if (!err.ok) {
+        err.text()
+          .then((error) => console.log(JSON.parse(error).message));
+      }
+      throw unknownOther;
+    })
+    .catch(() => console.log(constant.OTHER_ERRORS.serverBreak));
 }
 
 function showMore() {
@@ -312,4 +321,3 @@ constant.articlesContainer.addEventListener('click', saveArticleHendler);
 // callers
 isLogged();
 formSearch.setValidate();
-

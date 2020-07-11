@@ -27,10 +27,8 @@ export default class NewsCard {
     element.classList.remove('result-card__icon-active');
   }
 
-  // ощущения не те, зато безопасно
   _cardTag(urlToImage, publishedAt, title, description, url, sourceName, keyWord, backet = 'empt', keywordActive = 'empt', id = '') {
     const INDEXSPLITE = 0;
-    // функция sanitizeHTML  для борьбы с xss - не позволяет вставлять в данных пользователя html
     const template = document.createElement('div');
     template.insertAdjacentHTML('beforeend', `
         <div class="result-card" id="${sanitizeHTML(id)}">
@@ -39,12 +37,14 @@ export default class NewsCard {
               <button class="result-card__icon ${sanitizeHTML(backet)}"></button>
               <p class="result-card__categories ${sanitizeHTML(keywordActive)}">${sanitizeHTML(keyWord)}</p>
           </div>
-          <div class="result-card__description">
-            <p class="result-card__date">${sanitizeHTML(publishedAt.split('T')[INDEXSPLITE])}</p>
-            <h4 class="result-card__title">${sanitizeHTML(title)}</h4>
-            <p class="result-card__text">${sanitizeHTML(description)}</p>
-            <a class="result-card__source" href="${sanitizeHTML(url)}" target="_blank">${sanitizeHTML(sourceName)}</a>
-          </div>
+          <a href="${sanitizeHTML(url)}" target="_blank">
+            <div class="result-card__description">
+              <p class="result-card__date">${sanitizeHTML(publishedAt.split('T')[INDEXSPLITE])}</p>
+              <h4 class="result-card__title">${sanitizeHTML(title)}</h4>
+              <p class="result-card__text">${sanitizeHTML(description)}</p>
+              <a class="result-card__source" href="${sanitizeHTML(url)}" target="_blank">${sanitizeHTML(sourceName)}</a>
+            </div>
+          </a>
         </div>`);
 
     const resultCard = template.firstElementChild;

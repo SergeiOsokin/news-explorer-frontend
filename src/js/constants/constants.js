@@ -62,6 +62,7 @@ const OTHER_ERRORS = {
   failDeleteArt: 'Ошибка при удалении статьи ',
   noInternet: 'Отсутствует подключение к интренету',
   tryLater: 'Неизвестная ошибка. Попробуйте позже',
+  serverBreak: 'Сервер не доступен',
 };
 
 const isDev = process.env.NODE_ENV === 'development' ? BASE_OPTION_LOCAL : BASE_OPTION_DEPLOY;
