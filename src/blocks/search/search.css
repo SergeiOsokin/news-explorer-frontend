@@ -1,0 +1,30 @@
+@import url(./__button/button.css);
+@import url(./__description/description.css);
+@import url(./__form/form.css);
+@import url(./__input/input.css);
+@import url(./__title/title.css);
+@import url(./__error/error.css);
+
+.search {
+  display:flex;
+  flex-direction: column;
+  width: 50%;
+  color:#FFFFFF;
+  padding-top: 80px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .search {
+    max-width:452px;
+    padding-top: 38px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .search {
+    width:90%;
+    padding-top: 30px;
+    height: calc(536px - 56px);
+  }
+}

@@ -1,0 +1,25 @@
+@import url(./__title/title.css);
+
+.results-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 400px);
+  grid-gap: 16px 16px;
+  justify-content: center;
+  padding: 64px 104px 64px;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .results-list {
+    grid-template-columns: repeat(auto-fill, 224px);
+    grid-gap: 8px 8px;
+    padding: 32px 40px 32px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .results-list {
+    grid-template-columns: repeat(auto-fill, 288px);
+    grid-gap: 8px 8px;
+    padding: 24px 16px 15px;
+  }
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="autor" content="Sergei Osokin">
+  <meta name="description" content="Страница для поиска новостей по ключевым словам">
+  <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.css %>">
+  <link rel="shortcut icon" type="image/x-icon" sizes="16x16"
+    href="<%=require('../images/favicon-16x16.png').default%>">
+  <title>News</title>
+</head>
+
+<body class="body">
+
+  <header class="header">
+    <label class="header__label-checkbox" for="checkbox"></label>
+    <input type="checkbox" class="header__checkbox" id="checkbox">
+    <span class="header__menu-image"></span>
+    <p class="header__title">NewsExplorer</p>
+    <nav class="header__menu">
+      <a class="header__menu-main header__menu_active" href="./">Главная</a>
+      <a class="header__menu-articles header__menu-articles_not-logged" href="./articles.html">Сохранённые статьи</a>
+      <button class="header__button button">Авторизация</button>
+    </nav>
+  </header>
+
+  <main class="root">
+
+    <section class="search">
+      <h1 class="search__title">Что в мире творится?</h1>
+      <p class="search__description">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.
+      </p>
+      <div>
+        <form class="search__form popup__form">
+          <input class="input search__input" name="search" type="text" placeholder="Введите тему новости" maxlength="30"
+            minlength="2" required autocomplete="off" pattern="[А-ЯЁа-яёa-zA-Z]+">
+          <button class="search__button button">Искать</button>
+          <div class="search__error popup__error popup__error_text"></div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="result">
+
+    <div class="result__searching">
+
+      <div class="result__searching result__searching_download">
+        <i class="result__circle-preloader"></i>
+        <p class="result__text result__text_searching">Идет поиск новостей...</p>
+      </div>
+
+      <div class="result__searching result__searching_nothing">
+        <picture class="result__img">
+          <img src="<%=require('../images/not-found.png').default%>" alt="nothing found">
+        </picture>
+        <p class="result__text result__text_nothing">Ничего не найдено</p>
+        <p class="result__text result__text_sorry">К сожалению по вашему запросу ничего не найдено.</p>
+      </div>
+
+    </div>
+
+    <div class="result__found">
+
+      <h3 class="result__title">Результаты поиска</h3>
+
+      <div class="results-list">
+
+      </div>
+
+      <button class="button result__button">Показать еще</button>
+
+    </div>
+
+  </section>
+
+  <section class="autor">
+    <picture class="autor__image-content">
+      <source srcset="<%=require('../images/avatar_768-1023.png').default%>"
+        media="(min-width: 768px) and (max-width: 1023px)">
+      <source srcset="<%=require('../images/avatar_320-767.png').default%>"
+        media="(min-width: 320px) and (max-width: 767px)">
+      <img src="<%=require('../images/avatar_1024-1440.png').default%>" alt="avatar-avtor">
+    </picture>
+    <div class="autor__about">
+      <h2 class="autor__title">Об авторе (На фото не я :-))</h2>
+      <p class="autor__description">
+        Здравствуйте, меня зовут Сергей Осокин. Данный проект является дипломной работой по результатам обучения на образоваательной платформе Яндекс.Практикум.
+        <br><br>
+        За время обучения в Яндекс.Практикум изучил HTML5, CSS3, JS (ES6).
+        Познакомился с MongoDB, Node.js (сервер "личного кабинета" написан на фреймворке express),
+        научился собирать проект с использованием WebPack и размещать его на виртуальном сервере, настраивать Nginx, выписывать сертификаты для https.
+        <br>
+        Ссылку на мой репозиторий github вы сможете найти внизу страницы.
+      </p>
+    </div>
+  </section>
+
+  <div class="popup popup_entrance ">
+    <div class="popup__content">
+      <img src="<%=require('../images/close.svg').default%>" alt="close" class="popup__close">
+      <h3 class="popup__title">Вход</h3>
+      <form class="popup__form" name="entrance">
+        <fieldset>
+          <div>
+            <label for="email" class="popup__label popup__label_mail">Email</label>
+            <input type="email" autocomplete="off" id="email" name="emailenter"
+              class="input popup__input popup__input_type-email" placeholder="Введите почту" required maxlength="30"
+              minlength="2" pattern="[a-zA-Z0-1\W\D]{1,}@[[a-zA-Z0-1\W\D]{1,}\.[a-zA-Z]{2,3}">
+            <div class="popup__error popup__error_email"></div>
+          </div>
+          <div>
+            <label for="password" class="popup__label popup__label_password">Пароль</label>
+            <input type="password" autocomplete="off" id="password" name="passwordenter"
+              class="input popup__input popup__input_type-password" placeholder="Введите пароль" minlength="6" required>
+            <div class="popup__error popup__error_password"></div>
+          </div>
+          <div class="popup__error popup__error_text"></div>
+          <button class="button popup__button" disabled>Войти</button>
+        </fieldset>
+      </form>
+      <p class="popup__or">или <a class="popup__link popup__link_registration" href="#">Зарегистрироваться</a></p>
+    </div>
+  </div>
+
+  <div class="popup popup_registration">
+    <div class="popup__content">
+      <img src="<%=require('../images/close.svg').default%>" alt="close" class="popup__close">
+      <h3 class="popup__title">Регистрация</h3>
+      <form class="popup__form" name="entrance">
+        <fieldset>
+          <div>
+            <label for="email-reg" class="popup__label popup__label_mail">Email</label>
+            <input type="email" autocomplete="off" id="email-reg" name="emailreg"
+              class="input popup__input popup__input_registration popup__input_type-email" placeholder="Введите почту"
+              required maxlength="30" minlength="2" pattern="[a-zA-Z0-1\W\D]{1,}@[[a-zA-Z0-1\W\D]{1,}\.[a-zA-Z]{2,3}">
+            <div class="popup__error popup__error_email"></div>
+          </div>
+          <div>
+            <label for="password-reg" class="popup__label popup__label_password">Пароль</label>
+            <input type="password" autocomplete="off" id="password-reg" name="passwordreg"
+              class="input popup__input popup__input_registration popup__input_type-password"
+              placeholder="Введите пароль" required minlength="6">
+            <div class="popup__error popup__error_email"></div>
+          </div>
+          <div>
+            <label for="name" class="popup__label popup__label_name">Имя</label>
+            <input type="text" autocomplete="off" id="name" name="name"
+              class="input popup__input popup__input_registration popup__input_type_name" placeholder="Введите свое имя"
+              required maxlength="30" minlength="2">
+            <div class="popup__error popup__error_email"></div>
+          </div>
+          <div class="popup__error popup__error_text"></div>
+          <button class="button popup__button" disabled>Зарегистрироваться</button>
+        </fieldset>
+      </form>
+      <p class="popup__or">или <a class="popup__link popup__link_entrance" href="#">Войти</a></p>
+    </div>
+  </div>
+
+  <div class="popup popup_successfully">
+    <div class="popup__content popup__content_successfully">
+      <img src="<%=require('../images/close.svg').default%>" alt="close" class="popup__close">
+      <h3 class="popup__title">Пользователь успешно зарегистрирован!</h3>
+      <a class="popup__link popup__link_successfully" href="#">Выполнить вход</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p class="footer__copirate">&copy; 2020 Supersite, Powered by News API</p>
+    <a class="footer__link footer__link_main" href="./">Главная</a>
+    <a class="footer__link footer__link_YP" href="https://praktikum.yandex.ru/" target="_blank">Яндекс.практикум</a>
+    <a class="footer__link footer__link_GH" href="https://github.com/SergeiOsokin" target="_blank">
+      <img src="<%=require('../images/github.png').default%>" alt="github">
+    </a>
+    <a class="footer__link footer__link_FB" href="https://www.facebook.com/sergei.osokin.rf" target="_blank">
+      <img src="<%=require('../images/facebook.png').default%>" alt="facebook">
+    </a>
+  </footer>
+
+
+
+
+  <script type="module" src="<%= htmlWebpackPlugin.files.js %>"></script>
+</body>
+
+</html>

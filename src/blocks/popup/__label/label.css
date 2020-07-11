@@ -1,0 +1,19 @@
+.popup__label {
+  display:inline-block;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #2F71E5;
+}
+
+.popup__label_password{
+  margin-top:31px;
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .popup__label_mail {
+    margin-top:22px;
+  }
+}

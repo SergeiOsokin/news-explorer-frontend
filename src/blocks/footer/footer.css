@@ -1,0 +1,16 @@
+@import url(./__copirate/copirate.css);
+@import url(./__link/link.css);
+
+.footer {
+  display:flex;
+  align-items: center;
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .footer {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 16px 22px;
+  }
+}

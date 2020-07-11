@@ -1,0 +1,22 @@
+.footer__copirate {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: #B6BCBF;
+  margin-left: 104px;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .footer__copirate {
+    margin-left: 40px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .footer__copirate {
+    order: 5;
+    margin: 0;
+  }
+}

@@ -1,0 +1,21 @@
+@import url(./__amount/amount.css);
+@import url(./__key-words/key-words.css);
+@import url(./__title/title.css);
+
+.info-block {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0 56px 104px;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .info-block {
+    padding: 24px 16px 32px 40px;;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .info-block {
+    padding: 8px 16px 32px;
+  }
+}

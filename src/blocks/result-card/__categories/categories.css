@@ -1,0 +1,38 @@
+.result-card__categories {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #000000;
+  min-width: 40px;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin:0;
+  display:none;
+}
+
+.result-card__categories_active {
+  display: block;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .result-card__categories {
+    top: 8px;
+    left: 8px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .result-card__categories {
+    top: 16px;
+    left: 16px;
+  }
+}
+
+

@@ -1,0 +1,66 @@
+.header__button {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 19px 104px 13px 32px;
+  border-radius: 100px;
+  width: 176px;
+  height: 48px;
+}
+
+.header__button.header__button_loggined {
+  min-width: 112px;
+}
+.button__image {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url(../../../images/out.png);
+}
+
+.button.header__button_black {
+  border: 1px solid #1A1B22;
+  color: #1A1B22;
+}
+
+.button__image_black {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url(../../../images/out-black.png);
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .header__button {
+    width: 152px;
+    font-size: 16px;
+    height: 40px;
+    margin: 14px 40px 12px 16px;
+  }
+  .header__button.header__button_loggined {
+    min-width: 100px;
+  }
+}
+
+@media screen and (min-width:320px) and (max-width:767px) {
+  .header__button {
+    width: 288px;
+    font-size: 16px;
+    height: 56px;
+    margin: 19px auto 32px;
+  }
+  .header__button.header__button_loggined {
+    height: 56px;
+  }
+  .button.header__button_black {
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+  }
+  .button__image_black {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url(../../../images/out.png);
+  }
+}

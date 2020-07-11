@@ -1,0 +1,16 @@
+.info-block__key-words {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1A1B22;
+  margin: 0;
+}
+
+@media screen and (min-width:768px) and (max-width:1023px) {
+  .info-block__key-words {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
