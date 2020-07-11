@@ -55,9 +55,9 @@ function removeCookieHandler() {
   mainAPI.removeCookie()
     .then(() => {
       // для сервера и локально
-      window.location.href = '/';
+      // window.location.href = '/';
       // для github
-      // window.location.href = '/news-explorer-frontend/';
+      window.location.href = '/news-explorer-frontend/';
     })
     .catch((err) => alert(err));
 }
@@ -73,9 +73,9 @@ const getUserData = () => {
       err.text().then((error) => {
         console.log(error.message);
         // для сервера и локально
-        window.location.href = '/';
+        // window.location.href = '/';
         // для github
-        // window.location.href = '/news-explorer-frontend/';
+        window.location.href = '/news-explorer-frontend/';
       });
     });
 };

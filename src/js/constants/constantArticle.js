@@ -10,8 +10,8 @@ const PROPS = {
 };
 
 const BASE_OPTION_MAIN_API = {
-  // baseUrl: 'http://localhost:3000/',
-  baseUrl: 'https://www.api.news-search.tk/',
+  baseUrl: 'http://localhost:3000/',
+  // baseUrl: 'https://www.api.news-search.tk/',
   credentials: 'include',
 };
 
