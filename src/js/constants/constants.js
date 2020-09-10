@@ -33,7 +33,7 @@ const BASE_OPTION_LOCAL = 'http://newsapi.org/v2/everything?'
 + 'pageSize=50&'
 + 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
 
-const BASE_OPTION_DEPLOY = 'https://praktikum.tk/news/v2/everything?'
+const BASE_OPTION_DEPLOY = 'https://nomoreparties.co/news/v2/everything?'
 + 'pageSize=50&'
 + 'apiKey=f71a1f23df3e4dd3944aa53cca2414a6&';
 
